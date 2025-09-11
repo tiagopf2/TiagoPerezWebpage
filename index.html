@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiago Perez Filgueiras | Cybersecurity Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-section {
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 80px 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+            z-index: -1;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            animation: float 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+            font-weight: bold;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.8)); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #32CD32;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: #E8EAF6;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .navigation-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .nav-button {
+            padding: 20px 30px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .btn-about {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: #fff;
+        }
+
+        .btn-about:hover {
+            border-color: #667eea;
+        }
+
+        .btn-projects {
+            background: linear-gradient(45deg, #32CD32, #228B22);
+            color: #fff;
+        }
+
+        .btn-projects:hover {
+            border-color: #32CD32;
+        }
+
+        .btn-hacking {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            font-weight: 800;
+        }
+
+        .btn-hacking:hover {
+            border-color: #FFD700;
+        }
+
+        .btn-contact {
+            background: linear-gradient(45deg, #FF6B6B, #FF4757);
+            color: #fff;
+        }
+
+        .btn-contact:hover {
+            border-color: #FF6B6B;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            padding: 15px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .social-linkedin {
+            background: rgba(0, 119, 181, 0.2);
+            color: #0077b5;
+        }
+
+        .social-linkedin:hover {
+            background: rgba(0, 119, 181, 0.3);
+            border-color: #0077b5;
+        }
+
+        .social-github {
+            background: rgba(51, 51, 51, 0.2);
+            color: #333;
+        }
+
+        .social-github:hover {
+            background: rgba(51, 51, 51, 0.3);
+            border-color: #333;
+        }
+
+        .social-resume {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .social-resume:hover {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4CAF50;
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 60px 0 40px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .highlight-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .highlight-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .highlight-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .highlight-description {
+            color: #BDC3C7;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin: 30px 0;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-section {
+                padding: 50px 30px;
+            }
+
+            .navigation-buttons {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .highlight-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float-around 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+        }
+
+        .floating-element:nth-child(4) {
+            bottom: 10%;
+            right: 20%;
+            animation-delay: 15s;
+        }
+
+        @keyframes float-around {
+            0% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(0px) rotate(180deg); }
+            75% { transform: translateY(20px) rotate(270deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element">🛡️</div>
+        <div class="floating-element">⚽</div>
+        <div class="floating-element">💻</div>
+        <div class="floating-element">🔐</div>
+    </div>
+
+    <div class="container">
+        <div class="hero-section">
+            <div class="profile-image">
+                <img src="cv picture.jpg" alt="Tiago Perez Filgueiras - Professional Headshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            
+            <h1 class="hero-title">Tiago Perez Filgueiras</h1>
+            
+            <p class="hero-subtitle">
+                Cybersecurity Student | CTF Enjoyer | Technology Enthusiast
+            </p>
+            
+            <p class="hero-description">
+                Welcome to my cybersecurity portfolio! I'm a passionate cybersecurity student in Anderson University, South Carolina. Here, you'll discover my latest projects, how to reach ou to me, and my journey in the world of cybersecurity and technology.
+            </p>
+
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                Available for Internships & Collaborations
+            </div>
+
+            <!-- Highlight Cards -->
+            <div class="highlight-cards">
+                <div class="highlight-card">
+                    <span class="highlight-icon">🛡️</span>
+                    <div class="highlight-title">PhishPal Extension</div>
+                    <div class="highlight-description">Real-time phishing protection Chrome extension with VirusTotal integration</div>
+                </div>
+                
+                <div class="highlight-card">
+                    <span class="highlight-icon">🏆</span>
+                    <div class="highlight-title">CTF Champion</div>
+                    <div class="highlight-description">Top 20% performer in National Cyber League competitions</div>
+                </div>
+                
+                <div class="highlight-card">
+                    <span class="highlight-icon">👨🏻‍💻</span>
+                    <div class="highlight-title">Experience in the field</div>
+                    <div class="highlight-description">Worked with international companies automating technological processes</div>
+                </div>
+                
+                <div class="highlight-card">
+                    <span class="highlight-icon">🎓</span>
+                    <div class="highlight-title">Dec 2025 Graduate</div>
+                    <div class="highlight-description">Cybersecurity major ready to make an impact in the industry</div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons">
+                <a href="about.html" class="nav-button btn-about">
+                    <span>👨‍💻</span>
+                    About Me
+                </a>
+                <a href="projects.html" class="nav-button btn-projects">
+                    <span>💼</span>
+                    Projects
+                </a>
+                <a href="PhishPal.html" class="nav-button btn-PhishPal">
+                    <span>🛡️</span>
+                    PhishPal
+                </a>
+                <a href="contact.html" class="nav-button btn-contact">
+                    <span>📧</span>
+                    Contact
+                </a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank" class="social-link social-linkedin">
+                    <span>💼</span>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/tiagopf2" target="_blank" class="social-link social-github">
+                    <span>💻</span>
+                    GitHub
+                </a>
+                <a href="TiagoPerez_Resume1.pdf" target="_blank" class="social-link social-resume">
+                    <span>📄</span>
+                    My Resume
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Tiago Perez Filgueiras</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(0,0,0,0.1);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+            z-index: -1;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, hsl(191, 76%, 66%), #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(240, 147, 251, 0.8)); }
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: #E8EAF6;
+            margin-bottom: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: hsl(210, 76%, 66%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .projects-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: hsl(193, 76%, 66%);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #BDC3C7;
+            margin-top: 5px;
+        }
+
+        .featured-project {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(240, 147, 251, 0.2));
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 60px;
+            margin: 60px 0;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-project::before {
+            content: '⭐ FEATURED PROJECT';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .featured-project h2 {
+            color: hsl(179, 83%, 64%);
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .featured-project .project-icon {
+            font-size: 4rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, hsl(220, 76%, 66%), #764ba2, #f093fb);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .project-header .icon {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, hsl(185, 84%, 62%), #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .project-card h3 {
+            color: hsl(196, 76%, 66%);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: #E8EAF6;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: hsl(198, 76%, 66%);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            font-weight: bold;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .link-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .link-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .link-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .link-secondary:hover {
+            background: #667eea;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .video-container {
+            margin: 25px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .category-section {
+            margin: 80px 0;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .category-header h2 {
+            color: #f093fb;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .category-header p {
+            color: #BDC3C7;
+            font-size: 1.2rem;
+        }
+
+        .skills-showcase {
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 60px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .skills-showcase h2 {
+            color: hwb(270 2% 49%);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .skill-category {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .skill-category h4 {
+            color: hsl(270, 87%, 47%);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(118, 75, 162, 0.2);
+            color: #764ba2;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(118, 75, 162, 0.3);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 80px 0;
+            padding: 60px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+            border-radius: 25px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .cta-section h2 {
+            color: #529cdc;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #BDC3C7;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, hsl(205, 76%, 66%), #764ba2);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: hsl(202, 76%, 66%);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .featured-project, .project-card, .skills-showcase, .cta-section {
+                padding: 30px 20px;
+            }
+
+            .featured-project h2 {
+                font-size: 2rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-completed {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .status-ongoing {
+            background: rgba(255, 152, 0, 0.2);
+            color: #FF9800;
+            border: 1px solid rgba(255, 152, 0, 0.3);
+        }
+
+        .status-featured {
+            background: rgba(233, 30, 99, 0.2);
+            color: #E91E63;
+            border: 1px solid rgba(233, 30, 99, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>💼 My Projects</h1>
+            <p class="subtitle">Cybersecurity Solutions, Research & Innovation</p>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="about.html" class="nav-link">👨‍💻 About</a>
+                <a href="PhishPal.html" class="nav-link">🛡️ PhishPal</a>
+                <a href="contact.html" class="nav-link">📧 Contact</a>
+            </div>
+        </div>
+
+        <!-- Projects Stats -->
+        <div class="projects-stats">
+            <div class="stat-card">
+                <span class="stat-number">4+</span>
+                <span class="stat-label">Completed Projects</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">🛡️</span>
+                <span class="stat-label">Security Focus</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">⚽</span>
+                <span class="stat-label">Sports Analytics</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">💻</span>
+                <span class="stat-label">Open Source</span>
+            </div>
+        </div>
+
+        <!-- Featured Project: PhishPal -->
+        <div class="featured-project">
+            <div class="project-status status-featured">🌟 FEATURED PROJECT</div>
+            <h2><span class="project-icon">🛡️</span>PhishPal Chrome Extension</h2>
+            <p class="project-description">
+                A comprehensive real-time phishing protection Chrome extension that safeguards users from malicious websites. PhishPal integrates with the VirusTotal API to provide instant threat analysis, visual risk indicators, and detailed security reports for every link you encounter while browsing.
+            </p>
+
+            <div class="project-tech">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Chrome Extension API</span>
+                <span class="tech-tag">VirusTotal API</span>
+                <span class="tech-tag">HTML/CSS</span>
+                <span class="tech-tag">JSON</span>
+                <span class="tech-tag">Web Security</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 30px 0; align-items: center;">
+                <div>
+                    <h4 style="color: hsl(200, 76%, 66%); margin-bottom: 15px; font-size: 1.3rem;">🔍 Key Features:</h4>
+                    <ul style="color: #E8EAF6; font-size: 1.1rem; line-height: 1.8;">
+                        <li>✅ <strong>Real-time Link Scanning</strong> - Instant threat detection</li>
+                        <li>🎯 <strong>Visual Risk Indicators</strong> - Color-coded safety alerts</li>
+                        <li>📊 <strong>Detailed Security Reports</strong> - Comprehensive threat analysis</li>
+                        <li>⚡ <strong>Lightweight & Fast</strong> - Minimal performance impact</li>
+                        <li>🔒 <strong>Privacy-Focused</strong> - Secure API integration</li>
+                    </ul>
+                </div>
+                <div style="text-align: center;">
+                    <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; backdrop-filter: blur(10px);">
+                        <div style="font-size: 4rem; margin-bottom: 15px;">🛡️</div>
+                        <h4 style="color: hsl(194, 77%, 62%); margin-bottom: 10px;">Protection Level</h4>
+                        <div style="font-size: 2rem; color: #4CAF50; font-weight: bold;">MAXIMUM</div>
+                        <p style="color: #BDC3C7; margin-top: 10px;">Real-time threat detection</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-links">
+                <a href="hackinglab.html" class="project-link link-primary">
+                    🚀 View Full Details
+                </a>
+                <a href="https://github.com/tiagopf2/phishpal" target="_blank" class="project-link link-secondary">
+                    💻 GitHub Repository
+                </a>
+                <a href="#" class="project-link link-secondary">
+                    📥 Download Extension
+                </a>
+            </div>
+        </div>
+
+        <!-- Cybersecurity Projects Section -->
+        <div class="category-section">
+            <div class="category-header">
+                <h2>🔐 Cybersecurity Projects</h2>
+                <p>Hands-on security research and penetration testing projects</p>
+            </div>
+
+            <div class="project-grid">
+                <!-- Raspberry Pi Attack -->
+                <div class="project-card">
+                    <div class="project-status status-completed">✅ COMPLETED</div>
+                    <div class="project-header">
+                        <div class="icon">🥧</div>
+                        <h3>Raspberry Pi Attack Vector</h3>
+                    </div>
+                    <p class="project-description">
+                        Developed an automated attack system using a Raspberry Pi configured to emulate a keyboard instead of a USB storage device. The system executes predetermined scripts immediately upon connection, bypassing traditional security measures through hardware-based social engineering.
+                    </p>
+
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Bash Scripting</span>
+                        <span class="tech-tag">Raspberry Pi</span>
+                        <span class="tech-tag">Hardware Hacking</span>
+                        <span class="tech-tag">USB HID</span>
+                    </div>
+
+                    <div class="video-container">
+                        <video controls>
+                            <source src="RaspberryPiAttack.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="#" class="project-link link-primary">
+                            📹 Watch Demo
+                        </a>
+                        <a href="https://github.com/tiagopf2" target="_blank" class="project-link link-secondary">
+                            💻 View Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Smart Brute Force -->
+                <div class="project-card">
+                    <div class="project-status status-completed">✅ COMPLETED</div>
+                    <div class="project-header">
+                        <div class="icon">🔓</div>
+                        <h3>Smart Brute Force Password Cracker</h3>
+                    </div>
+                    <p class="project-description">
+                        Enhanced traditional brute-force methods by incorporating social engineering techniques. The system generates customized wordlists based on user inputs, applying intelligent variations like capitalization, leetspeak substitutions, and special character insertions for more efficient password cracking.
+                    </p>
+
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Dictionary Attacks</span>
+                        <span class="tech-tag">Social Engineering</span>
+                        <span class="tech-tag">Cryptography</span>
+                        <span class="tech-tag">Security Testing</span>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: hsl(199, 76%, 66%); margin-bottom: 10px;">🎯 Key Improvements:</h4>
+                        <ul style="color: #E8EAF6; line-height: 1.6;">
+                            <li>📈 <strong>Efficiency Boost:</strong> 300% faster than traditional methods</li>
+                            <li>🧠 <strong>Smart Wordlists:</strong> Personalized attack vectors</li>
+                            <li>🔤 <strong>Pattern Recognition:</strong> Common password variations</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://github.com/tiagopf2/Cyb220/blob/51a0a768806029da17f6b9494d6271e41731a958/Programming%20Projects/Final%20Project" target="_blank" class="project-link link-primary">
+                            💻 View Project
+                        </a>
+                        <a href="#" class="project-link link-secondary">
+                            📄 Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sports Analytics Projects Section -->
+        <div class="category-section">
+            <div class="category-header">
+                <h2>⚽ Sports Analytics Projects</h2>
+                <p>Applying mathematical concepts and data analysis to soccer</p>
+            </div>
+
+            <div class="project-grid">
+                <!-- Voronoi Diagram Soccer -->
+                <div class="project-card">
+                    <div class="project-status status-completed">✅ COMPLETED</div>
+                    <div class="project-header">
+                        <div class="icon">📊</div>
+                        <h3>Voronoi Diagram Soccer Analysis</h3>
+                    </div>
+                    <p class="project-description">
+                        Applied Voronoi diagrams to analyze spatial control in soccer matches. This mathematical approach divides the field into regions based on player proximity, providing objective insights into team shape, pressing efficiency, and optimal movement patterns for tactical analysis.
+                    </p>
+
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Data Visualization</span>
+                        <span class="tech-tag">Mathematical Modeling</span>
+                        <span class="tech-tag">Sports Analytics</span>
+                        <span class="tech-tag">Voronoi Algorithms</span>
+                    </div>
+
+                    <div class="video-grid">
+                        <div class="video-container">
+                            <video controls>
+                                <source src="VoronoiDiagramsSoccer.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="video-container">
+                            <video controls>
+                                <source src="VoronoiBoardDemostration.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: #667eea; margin-bottom: 10px;">⚽ Applications:</h4>
+                        <ul style="color: #E8EAF6; line-height: 1.6;">
+                            <li>🎯 <strong>Tactical Analysis:</strong> Team formation effectiveness</li>
+                            <li>📍 <strong>Space Control:</strong> Field dominance visualization</li>
+                            <li>🏃‍♂️ <strong>Player Movement:</strong> Optimal positioning strategies</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://github.com/tiagopf2/soccer.git" target="_blank" class="project-link link-primary">
+                            💻 GitHub Repository
+                        </a>
+                        <a href="#" class="project-link link-secondary">
+                            📹 Watch Analysis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Showcase -->
+        <div class="skills-showcase">
+            <h2>🛠️ Technical Skills Demonstrated</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>🔐 Cybersecurity</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Penetration Testing</span>
+                        <span class="skill-tag">Vulnerability Assessment</span>
+                        <span class="skill-tag">Social Engineering</span>
+                        <span class="skill-tag">Hardware Security</span>
+                        <span class="skill-tag">Web Security</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>💻 Programming</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Bash Scripting</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">API Integration</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>🔧 Tools & Platforms</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Chrome Extensions</span>
+                        <span class="skill-tag">VirusTotal API</span>
+                        <span class="skill-tag">Raspberry Pi</span>
+                        <span class="skill-tag">Git/GitHub</span>
+                        <span class="skill-tag">Data Analysis</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>📊 Analytics</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Mathematical Modeling</span>
+                        <span class="skill-tag">Data Visualization</span>
+                        <span class="skill-tag">Sports Analytics</span>
+                        <span class="skill-tag">Pattern Recognition</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2>🚀 Interested in My Work?</h2>
+            <p>I'm always working on new projects and looking for collaboration opportunities. Let's connect and build something amazing together!</p>
+            
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">
+                    📧 Get In Touch
+                </a>
+                <a href="https://github.com/tiagopf2" target="_blank" class="btn btn-secondary">
+                    💻 View All Code
+                </a>
+                <a href="about.html" class="btn btn-secondary">
+                    👨‍💻 Learn More About Me
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

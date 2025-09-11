@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Tiago Perez Filgueiras</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #9b59b6 100%);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(0,0,0,0.1);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
+            z-index: -1;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #3498db, #9b59b6, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(52, 152, 219, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(155, 89, 182, 0.8)); }
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: #E8EAF6;
+            margin-bottom: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .intro-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin: 60px 0;
+            align-items: center;
+        }
+
+        .profile-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .intro-text {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .intro-text h2 {
+            color: hsl(215, 76%, 49%);
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .intro-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, hsl(217, 85%, 52%), #9b59b6);
+            border-radius: 2px;
+        }
+
+        .highlight-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: hsl(218, 75%, 51%);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #BDC3C7;
+            margin-top: 5px;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section h3 {
+            color: hsl(34, 88%, 49%);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3498db, #9b59b6, #e74c3c);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: hsla(218, 70%, 53%, 0.908);
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .timeline-item h4 {
+            color: lch(43.58% 82.19 298.58);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .skill-category {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid #3498db;
+        }
+
+        .skill-category h4 {
+            color: hsl(185, 86%, 53%);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: rgba(52, 152, 219, 0.2);
+            color: hwb(192 15% 12%);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(155, 89, 182, 0.1));
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.2);
+        }
+
+        .achievement-card h4 {
+            color: hsl(49, 84%, 57%);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quote-section {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(155, 89, 182, 0.2));
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            margin: 60px 0;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            position: relative;
+        }
+
+        .quote-section::before {
+            content: '"';
+            font-size: 8rem;
+            color: rgba(52, 152, 219, 0.3);
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #E8EAF6;
+            margin-bottom: 20px;
+        }
+
+        .quote-author {
+            color: hsl(221, 76%, 51%);
+            font-weight: bold;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            margin: 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: #2c3e50;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+          
+            .intro-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+          
+            .highlight-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-grid, .achievements {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .section, .intro-text, .profile-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, hwb(274 8% 16%), #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .external-link {
+            color: hsl(218, 95%, 46%);
+            text-decoration: none;
+            border-bottom: 1px dotted #3498db;
+            transition: all 0.3s ease;
+        }
+
+        .external-link:hover {
+            color: #9b59b6;
+            border-bottom-color: #9b59b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>About Me</h1>
+            <p class="subtitle">Cybersecurity Student |  Seeking internships | Technology Enthusiast</p>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="projects.html" class="nav-link">💼 Projects</a>
+                <a href="PhishPal.html" class="nav-link">🛡️ PhishPal</a>
+                <a href="contact.html" class="nav-link">📧 Contact</a>
+            </div>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="intro-section">
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="cv picture.jpg" alt="Tiago Perez Filgueiras - Professional Headshot" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                <h3>Tiago Perez Filgueiras</h3>
+                <p>Cybersecurity Student</p>
+                <p>Anderson University</p>
+                <p>🇪🇸 ➜ 🇺🇸</p>
+            </div>
+            
+            <div class="intro-text">
+                <h2>Hi, I'm Tiago! 👋</h2>
+                <p>I am a cybersecurity student studying in Anderson South Carolina. I've been balancing my passion for cybersecurity with my love for sports and different jobs to support my studies.</p>
+                
+                <p>As the captain of Anderson University's soccer team, I've learned the importance of discipline, strategy, and teamwork skills that also play a huge role in my approach to cybersecurity. Whether I'm competing on the field or solving complex security challenges, I always push myself to improve, adapt, and stay ahead of the game.</p>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="highlight-stats">
+            <div class="stat-card">
+                <span class="stat-number">2</span>
+                <span class="stat-label">Compiter Jobs</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">Dec 2025</span>
+                <span class="stat-label">Graduation</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">⚽</span>
+                <span class="stat-label">Team Captain</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">🛡️</span>
+                <span class="stat-label">Cybersecurity Focus</span>
+            </div>
+        </div>
+
+        <!-- Cybersecurity Path Section -->
+        <div class="section">
+            <h3><span class="section-icon">🔐</span>My Cybersecurity Journey</h3>
+          
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Academic Foundation</h4>
+                    <p>I'm a cybersecurity enthusiast with a passion for solving complex challenges. My journey in cybersecurity started at Anderson University, where I've gained comprehensive knowledge through structured coursework. You can view all my classes and coursework <a href="https://catalog.andersonuniversity.edu/preview_program.php?catoid=27&poid=2784&returnto=1566" target="_blank" class="external-link">here</a>.</p>
+                </div>
+              
+                <div class="timeline-item">
+                    <h4>Hands-On Experience</h4>
+                    <p>I've gained practical experience in various aspects of cybersecurity, including penetration testing, network security, and incident response. My approach combines theoretical knowledge with real-world application.</p>
+                </div>
+              
+                <div class="timeline-item">
+                    <h4>Continuous Learning</h4>
+                    <p>I stay up-to-date with the latest trends and threats in the industry through personal projects, research, and hands-on experimentation. Check out my projects <a href="projects.html" class="external-link">here</a>.</p>
+                </div>
+              
+                <div class="timeline-item">
+                    <h4> Top 20% in the nation</h4>
+                    <p>I actively participate in CTF (Capture the Flag) challenges and cybersecurity competitions. Our team was ranked in the top 20% in the last National Cyber Competition - read about it <a href="https://andersonuniversity.edu/news/anderson-university-lands-top-spot-national-cyber-league-competition/" target="_blank" class="external-link">here</a>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h3><span class="section-icon">⚡</span>Technical Skills</h3>
+          
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>🔍 Security Testing</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Penetration Testing</span>
+                        <span class="skill-tag">Vulnerability Assessment</span>
+                        <span class="skill-tag">Network Security</span>
+                        <span class="skill-tag">Incident Response</span>
+                    </div>
+                </div>
+              
+                <div class="skill-category">
+                    <h4>💻 Development</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Chrome Extensions</span>
+                        <span class="skill-tag">API Integration</span>
+                        <span class="skill-tag">Web Security</span>
+                    </div>
+                </div>
+              
+                <div class="skill-category">
+                    <h4>🛠️ Tools & Platforms</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">VirusTotal API</span>
+                        <span class="skill-tag">Security Frameworks</span>
+                        <span class="skill-tag">CTF Platforms</span>
+                        <span class="skill-tag">Analysis Tools</span>
+                    </div>
+                </div>
+              
+                <div class="skill-category">
+                    <h4>🎯 Soft Skills</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Team Leadership</span>
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Strategic Thinking</span>
+                        <span class="skill-tag">Adaptability</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="section">
+            <h3><span class="section-icon">🏆</span>Key Achievements</h3>
+          
+            <div class="achievements">
+                <div class="achievement-card">
+                    <h4>🥇 National Cyber League Recognition</h4>
+                    <p>Part of Anderson University's cybersecurity competition team that achieved top rankings in national competitions, demonstrating excellence in practical cybersecurity skills.</p>
+                </div>
+              
+                <div class="achievement-card">
+                    <h4>⚽ Soccer Team Captain</h4>
+                    <p>Leading Anderson University's soccer team while maintaining academic excellence, developing crucial leadership and time management skills.</p>
+                </div>
+              
+                <div class="achievement-card">
+                    <h4>🛡️ PhishPal Extension</h4>
+                    <p>Developed a Chrome extension for real-time phishing detection using VirusTotal API, showcasing practical application of cybersecurity knowledge.</p>
+                </div>
+              
+                <div class="achievement-card">
+                    <h4>🌍 International Adaptation</h4>
+                    <p>Successfully transitioned from Spain to the USA, overcoming language and cultural barriers while excelling academically and athletically.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Journey Section -->
+        <div class="section">
+            <h3><span class="section-icon">🌟</span>Beyond Cybersecurity</h3>
+          
+            <p>Moving from Spain to the United States at 18 years old was one of the biggest challenges of my life, but also one of the most rewarding. Adapting to a new culture, language, and way of life pushed me out of my comfort zone and taught me resilience.</p>
+          
+            <p>My mindset changed, I started fighting for my future and doing whatever was in my hands to succeed. As a result, I will be graduating in less than 4 years with a major that I truly enjoy. I am the captain of the soccer team and currently working at the university, gaining valuable experience in professional life.</p>
+          
+            <p>This journey has taught me that challenges are opportunities in disguise. Every obstacle I've faced has made me stronger, more determined, and better prepared for the cybersecurity field where adaptability and perseverance are essential.</p>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2 style="margin-bottom: 30px; color: lab(68.06% -13.28 -36.47);">Let's Connect!</h2>
+            <p style="margin-bottom: 40px; font-size: 1.2rem;">Interested in cybersecurity, soccer, or just want to chat? I'd love to hear from you!</p>
+          
+            <a href="contact.html" class="btn btn-primary">📧 Get In Touch</a>
+            <a href="projects.html" class="btn btn-secondary">💼 View My Work</a>
+            <a href="TiagoPerez_Resume1.pdf" target="_blank" class="btn btn-secondary">📄 Download Resume</a>
+        </div>
+    </div>
+</body>
+</html>

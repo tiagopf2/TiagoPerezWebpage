@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishPal - Anti-Phishing Chrome Extension</title>
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    }
+
+    .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    }
+
+    .header {
+    text-align: center;
+    padding: 60px 0;
+    background: rgba(0,0,0,0.1);
+    border-radius: 20px;
+    margin-bottom: 40px;
+    backdrop-filter: blur(10px);
+    }
+
+    .header h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .header .subtitle {
+    font-size: 1.5rem;
+    color: #E8EAF6;
+    margin-bottom: 30px;
+    }
+
+    .extension-icon {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+    }
+
+    .extension-icon:hover {
+    transform: scale(1.1);
+    }
+
+    .tech-stack {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    }
+
+    .tech-badge {
+    background: rgba(255,255,255,0.15);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    }
+
+    .tech-badge:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+    }
+
+    .features-section {
+    margin: 60px 0;
+    }
+
+    .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #FFD700;
+    }
+
+    .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+    }
+
+    .feature-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FFD700, #FFA500);
+    }
+
+    .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .feature-card h3 {
+    color: #FFD700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    }
+
+    .feature-card .emoji {
+    font-size: 2rem;
+    }
+
+    .how-it-works {
+    background: rgba(0,0,0,0.2);
+    border-radius: 20px;
+    padding: 50px;
+    margin: 60px 0;
+    backdrop-filter: blur(10px);
+    }
+
+    .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    }
+
+    .step {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    }
+
+    .step:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-5px);
+    }
+
+    .step-number {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #000;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .architecture-section {
+    background: rgba(0,0,0,0.3);
+    border-radius: 20px;
+    padding: 50px;
+    margin: 60px 0;
+    backdrop-filter: blur(10px);
+    }
+
+    .architecture-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+    }
+
+    .arch-component {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    min-width: 200px;
+    border: 2px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    }
+
+    .arch-component:hover {
+    transform: translateY(-5px);
+    border-color: #FFD700;
+    }
+
+    .arch-arrow {
+    font-size: 2rem;
+    color: #FFD700;
+    }
+
+    .code-demo {
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 40px 0;
+    border-left: 5px solid #FFD700;
+    overflow-x: auto;
+    }
+
+    .code-demo h3 {
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    }
+
+    .code-demo pre {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    }
+
+    .code-demo code {
+    color: #f8f8f2;
+    }
+
+    .installation {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(139, 195, 74, 0.2));
+    border-radius: 20px;
+    padding: 50px;
+    margin: 60px 0;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    .installation h2 {
+    color: #4CAF50;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-align: center;
+    }
+
+    .install-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+    margin: 40px 0;
+    }
+
+    .install-option {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    transition: all 0.3s ease;
+    }
+
+    .install-option:hover {
+    border-color: #4CAF50;
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-5px);
+    }
+
+    .install-option h3 {
+    color: #4CAF50;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    }
+
+    .chrome-store-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 15px 25px;
+    background: linear-gradient(45deg, #4285f4, #34a853);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+    }
+
+    .chrome-store-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4);
+    }
+
+    .install-steps {
+    list-style: none;
+    padding: 0;
+    }
+
+    .install-steps li {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+    transition: all 0.3s ease;
+    }
+
+    .install-steps li:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateX(10px);
+    }
+
+    .install-steps li:before {
+    content: "✓ ";
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    }
+
+    .demo-section {
+    background: rgba(0,0,0,0.3);
+    border-radius: 20px;
+    padding: 50px;
+    margin: 60px 0;
+    text-align: center;
+    }
+
+    .demo-link {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 30px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    }
+
+    .demo-link:hover {
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.1);
+    }
+
+    .warning {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(255, 193, 7, 0.2));
+    border-radius: 15px;
+    padding: 30px;
+    margin: 40px 0;
+    border-left: 5px solid #FF9800;
+    }
+
+    .warning h3 {
+    color: #FF9800;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    }
+
+    .buttons {
+    text-align: center;
+    margin: 60px 0;
+    }
+
+    .btn {
+    display: inline-block;
+    padding: 15px 40px;
+    margin: 15px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+    left: 100%;
+    }
+
+    .btn-primary {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #000;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+    }
+
+    .btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    }
+
+    .btn-secondary:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-3px);
+    }
+
+    .recommended {
+    position: relative;
+    }
+
+    .recommended::after {
+    content: "RECOMMENDED";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    }
+
+    .highlight {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    }
+
+    .new-badge {
+    background: linear-gradient(45deg, #FF6B6B, #FF4757);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 10px;
+    animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+    .header h1 {
+    font-size: 2.5rem;
+    }
+    
+    .features-grid {
+    grid-template-columns: 1fr;
+    }
+    
+    .steps-container {
+    grid-template-columns: 1fr;
+    }
+
+    .install-options {
+    grid-template-columns: 1fr;
+    }
+
+    .architecture-diagram {
+    flex-direction: column;
+    }
+
+    .arch-arrow {
+    transform: rotate(90deg);
+    }
+
+    .container {
+    padding: 10px;
+    }
+
+    .feature-card, .installation, .how-it-works, .architecture-section {
+    padding: 30px 20px;
+    }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <!-- Header Section -->
+    <div class="header">
+    <h1>🛡️ PhishPal</h1>
+    <p class="subtitle">Your Friendly Anti-Phishing Chrome Extension</p>
+    <img src="icon128.png" alt="PhishPal Icon" class="extension-icon">
+    <div class="tech-stack">
+    <span class="tech-badge">Chrome Extension</span>
+    <span class="tech-badge">Railway Backend API <span class="new-badge">NEW</span></span>
+    <span class="tech-badge">VirusTotal Integration</span>
+    <span class="tech-badge">JavaScript ES6+</span>
+    <span class="tech-badge">Manifest V3</span>
+    <span class="tech-badge">Real-time Scanning</span>
+    </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section">
+    <h2 class="section-title">🚀 Key Features</h2>
+    <div class="features-grid">
+    <div class="feature-card">
+    <h3><span class="emoji">🔍</span>On-Hover Scanning</h3>
+    <p>PhishPal automatically adds a <strong>"🔍 Scan"</strong> button when you hover over any HTTP/HTTPS link. Click to instantly check the link's reputation through our secure backend API.</p>
+    </div>
+    
+    <div class="feature-card">
+    <h3><span class="emoji">🚦</span>Visual Risk Indicators</h3>
+    <p>Get instant visual feedback with color-coded indicators:</p>
+    <ul style="margin-top: 10px; padding-left: 20px;">
+    <li>🟢 <strong>Safe</strong> - No threats detected</li>
+    <li>🟡 <strong>Suspicious</strong> - Flagged by some engines</li>
+    <li>🔴 <strong>Dangerous</strong> - Malicious content detected</li>
+    <li>❓ <strong>Error</strong> - Scan failed or API issue</li>
+    </ul>
+    </div>
+    
+    <div class="feature-card">
+    <h3><span class="emoji">📊</span>Detailed Tooltips</h3>
+    <p>Hover over result markers to see comprehensive VirusTotal statistics including malicious, suspicious, harmless, and undetected counts from multiple security engines.</p>
+    </div>
+    
+    <div class="feature-card">
+    <h3><span class="emoji">⚡</span>Enhanced Performance</h3>
+    <p>Our Railway backend handles API rate limiting, caching, and optimization. No need to manage your own VirusTotal API key - everything works seamlessly out of the box!</p>
+    </div>
+    </div>
+    </div>
+
+    <!-- Architecture Section -->
+    <div class="architecture-section">
+    <h2 class="section-title">🏗️ New Architecture</h2>
+    <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">
+    PhishPal now uses a secure backend API deployed on Railway for enhanced performance and reliability
+    </p>
+    
+    <div class="architecture-diagram">
+    <div class="arch-component">
+    <h4>🌐 Chrome Extension</h4>
+    <p>Content & Background Scripts</p>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-component">
+    <h4>🚀 Railway Backend</h4>
+    <p>Express.js API Server</p>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-component">
+    <h4>🔍 VirusTotal API</h4>
+    <p>Threat Intelligence</p>
+    </div>
+    </div>
+
+    <div class="features-grid" style="margin-top: 40px;">
+    <div class="feature-card">
+    <h3><span class="emoji">🔒</span>Secure API Handling</h3>
+    <p>Your VirusTotal API key is safely stored on our backend server, never exposed to the client-side extension code.</p>
+    </div>
+    
+    <div class="feature-card">
+    <h3><span class="emoji">⚡</span>Rate Limiting & Caching</h3>
+    <p>Backend handles API rate limits intelligently and caches results to improve performance and reduce API usage.</p>
+    </div>
+    
+    <div class="feature-card">
+    <h3><span class="emoji">🌍</span>Global Availability</h3>
+    <p>Railway deployment ensures high availability and fast response times from anywhere in the world.</p>
+    </div>
+    
+    <div class="feature-card">
+    <h3><span class="emoji">🛠️</span>Easy Maintenance</h3>
+    <p>Centralized backend makes updates and improvements seamless without requiring extension updates.</p>
+    </div>
+    </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="how-it-works">
+    <h2 class="section-title">🔧 How PhishPal Works</h2>
+    <div class="steps-container">
+    <div class="step">
+    <div class="step-number">1</div>
+    <h4>Hover Detection</h4>
+    <p>Content script detects when you hover over HTTP/HTTPS links and dynamically creates scan buttons</p>
+    </div>
+    <div class="step">
+    <div class="step-number">2</div>
+    <h4>User Interaction</h4>
+    <p>Click the "🔍 Scan" button to initiate URL analysis. Button shows loading state during scan</p>
+    </div>
+    <div class="step">
+    <div class="step-number">3</div>
+    <h4>Railway Backend API</h4>
+    <p>Background script sends URL to secure Railway backend server, which handles VirusTotal API calls, rate limiting, and caching</p>
+    </div>
+    <div class="step">
+    <div class="step-number">4</div>
+    <h4>Visual Results</h4>
+    <p>Scan button is replaced with color-coded result marker and detailed tooltip with engine statistics</p>
+    </div>
+    </div>
+    </div>
+
+    <!-- Installation Section -->
+    <div class="installation">
+    <h2>📦 Installation Options</h2>
+    <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">
+    Choose your preferred installation method - now with simplified setup!
+    </p>
+    
+    <div class="install-options">
+    <!-- Chrome Web Store Option -->
+    <div class="install-option recommended">
+    <h3>🏪 Chrome Web Store</h3>
+    <p style="text-align: center; margin-bottom: 20px;">
+    <strong>Easy One-Click Installation - No API Key Required!</strong>
+    </p>
+    <a href="https://chromewebstore.google.com/detail/phishing-hover-detector/jjpkehnmilpkedcbpmfcgkklighplomb?authuser=0&hl=es" 
+    target="_blank" 
+    class="chrome-store-btn">
+    🛒 Install from Chrome Web Store
+    </a>
+    <ul class="install-steps">
+    <li>Click the "Install from Chrome Web Store" button above</li>
+    <li>Click "Add to Chrome" on the Chrome Web Store page</li>
+    <li>Confirm by clicking "Add extension" in the popup</li>
+    <li>PhishPal will be automatically installed and ready to use!</li>
+    <li>Visit any website and hover over links to see PhishPal in action</li>
+    <li>No configuration needed - backend handles everything!</li>
+    </ul>
+    </div>
+
+    <!-- Developer Mode Option -->
+    <div class="install-option">
+    <h3>🔧 Developer Mode</h3>
+    <p style="text-align: center; margin-bottom: 20px;">
+    <strong>For Development & Testing</strong>
+    </p>
+    <ul class="install-steps">
+    <li>Download extension from <a href="https://github.com/tiagopf2" target="_blank" style="color: #4CAF50;">GitHub</a></li>
+    <li>Open Chrome and go to <code>chrome://extensions</code></li>
+    <li>Enable "Developer mode" toggle (top-right)</li>
+    <li>Click "Load unpacked" and select PhishPal folder</li>
+    <li>Extension is ready to use - no API key setup required!</li>
+    <li>Backend automatically handles all VirusTotal API calls</li>
+    </ul>
+    </div>
+    </div>
+    </div>
+
+    <!-- Code Demo Section -->
+    <div class="code-demo">
+    <h3>🧩 Updated Backend Integration</h3>
+    <p>Here's how PhishPal now communicates with the Railway backend:</p>
+    <pre><code>// New backend API integration
+async function checkUrlWithBackend(url) {
+  try {
+    const response = await fetch('https://phishpal-backend-production.up.railway.app/api/check-url', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Backend error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.stats;
+  } catch (error) {
+    console.error('Backend failed:', error);
+    return { 
+      harmless: 0, 
+      malicious: 0, 
+      suspicious: 1, 
+      undetected: 0 
+    };
+  }
+}
+
+// Message handling for content script communication
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "scanLink" && request.link) {
+    checkUrlWithBackend(request.link)
+      .then(stats => sendResponse({ stats }))
+      .catch(error => {
+        console.error("Scan error:", error);
+        sendResponse({ 
+          error: error.message,
+          stats: { harmless: 0, malicious: 0, suspicious: 1, undetected: 0 }
+        });
+      });
+    return true;
+  }
+});</code></pre>
+    </div>
+
+    <!-- Demo Section -->
+    <div class="demo-section">
+    <h2 class="section-title">🎯 Try It Out</h2>
+    <p>Once installed, PhishPal will work on any website. Here are some example links to test:</p>
+    <div style="margin: 30px 0;">
+    <a href="https://www.google.com" class="demo-link">https://www.google.com</a>
+    <a href="https://www.github.com" class="demo-link">https://www.github.com</a>
+    <a href="https://example.com" class="demo-link">https://example.com</a>
+    </div>
+    <p><em>Hover over these links after installation to see PhishPal in action!</em></p>
+    </div>
+
+    <!-- Technical Details -->
+    <div class="code-demo">
+    <h3>⚙️ Updated Technical Implementation</h3>
+    <p><strong>Enhanced Manifest V3 Architecture:</strong></p>
+    <pre><code>{
+  "manifest_version": 3,
+  "name": "Phishing Hover Detector",
+  "version": "1.1",
+  "permissions": ["scripting", "tabs", "storage"],
+  "host_permissions": [
+    "&lt;all_urls&gt;",
+    "https://phishpal-backend-production.up.railway.app/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [{
+    "matches": ["&lt;all_urls&gt;"],
+    "js": ["content.js"]
+  }],
+  "icons": {
+    "48": "icon48.png"
+  }
+}</code></pre>
+    <p><strong>Key Improvements:</strong></p>
+    <ul style="margin-top: 15px; padding-left: 20px;">
+    <li><strong>Railway Backend:</strong> Secure Express.js server handling all API communications</li>
+    <li><strong>No API Key Required:</strong> Users don't need to manage VirusTotal API keys</li>
+    <li><strong>Enhanced Security:</strong> API credentials safely stored on backend server</li>
+    <li><strong>Better Performance:</strong> Server-side caching and rate limiting</li>
+    <li><strong>Improved Reliability:</strong> Centralized error handling and fallback mechanisms</li>
+    </ul>
+    </div>
+
+    <!-- Warning Section -->
+    <div class="warning">
+    <h3>⚠️ Important Disclaimer</h3>
+    <p>PhishPal is an <span class="highlight">MVP (Minimum Viable Product)</span> designed for educational and demonstration purposes. While it provides real threat detection using VirusTotal's API through our secure backend, users should:</p>
+    <ul style="margin-top: 15px; padding-left: 20px;">
+    <li>Never click on links flagged as dangerous (🔴)</li>
+    <li>Exercise caution even with "safe" results</li>
+    <li>Use additional security measures and common sense</li>
+    <li>Be aware that no security tool is 100% foolproof</li>
+    </ul>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="buttons">
+    <a href="https://chromewebstore.google.com/detail/phishing-hover-detector/jjpkehnmilpkedcbpmfcgkklighplomb?authuser=0&hl=es" 
+    target="_blank" 
+    class="btn btn-primary">
+    🛒 Install Extension
+    </a>
+    <a href="https://github.com/tiagopf2" target="_blank" class="btn btn-secondary">
+    📂 View Source Code
+    </a>
+    <a href="index.html" class="btn btn-secondary">
+    🏠 Back to Portfolio
+    </a>
+    </div>
+    </div>
+</body>
+</html>
