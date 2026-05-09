@@ -3,671 +3,745 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Me - Tiago Perez Filgueiras</title>
+    <title>Contact | Tiago Perez</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #0f172a;
+            --accent: #38bdf8;
+            --accent2: #818cf8;
+            --green: #34d399;
+            --gold: #fbbf24;
+            --red: #f87171;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --card-bg: rgba(255,255,255,0.05);
+            --card-border: rgba(255,255,255,0.1);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
-            color: #fff;
-            line-height: 1.6;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0f172a;
+            color: var(--text);
+            line-height: 1.7;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(56,189,248,0.10) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(129,140,248,0.10) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(52,211,153,0.04) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .header {
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* ── TOP NAV ── */
+        .topnav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+
+        .topnav-brand {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .topnav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .topnav-link {
+            padding: 8px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--muted);
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            transition: all 0.22s;
+        }
+
+        .topnav-link:hover, .topnav-link.active {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(56,189,248,0.08);
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 56px 40px 44px;
             text-align: center;
-            padding: 60px 0;
-            background: rgba(0,0,0,0.1);
-            border-radius: 20px;
             margin-bottom: 40px;
-            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
 
-        .header::before {
+        .page-header::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(30, 60, 114, 0.1), rgba(102, 126, 234, 0.1));
-            z-index: -1;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2), var(--green));
         }
 
-        .header h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+        .page-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 10px;
         }
 
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.5)); }
-            to { filter: drop-shadow(0 0 20px rgba(118, 75, 162, 0.8)); }
+        .page-header .tagline {
+            color: var(--muted);
+            font-size: 1rem;
         }
 
-        .header .subtitle {
-            font-size: 1.5rem;
-            color: #E8EAF6;
-            margin-bottom: 30px;
-        }
-
-        .nav-links {
+        /* ── SECTION TITLE ── */
+        .section-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
         }
 
-        .nav-link {
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 25px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            backdrop-filter: blur(5px);
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--card-border);
         }
 
-        .nav-link:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: #667eea;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
+        /* ── CONTACT GRID ── */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin: 60px 0;
-            align-items: start;
+            gap: 24px;
+            margin-bottom: 40px;
         }
 
-        .contact-info {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px);
+        /* ── CONTACT INFO CARD ── */
+        .contact-info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 50px;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .contact-info:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        .contact-info-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
         }
 
-        .contact-info h2 {
-            color: #667eea;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .contact-info-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .contact-info-card .sub {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-bottom: 28px;
         }
 
         .contact-methods {
             display: flex;
             flex-direction: column;
-            gap: 25px;
-            margin: 40px 0;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .contact-method {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding: 20px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+            gap: 16px;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--card-border);
+            border-left: 3px solid var(--accent);
+            border-radius: 12px;
+            transition: all 0.22s;
         }
 
         .contact-method:hover {
-            background: rgba(0,0,0,0.3);
-            transform: translateX(10px);
-            border-left-color: #667eea;
+            background: rgba(56,189,248,0.06);
+            border-left-color: var(--accent2);
+            transform: translateX(4px);
         }
 
-        .contact-icon {
-            font-size: 2rem;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 50%;
+        .method-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(129,140,248,0.15));
+            border: 1px solid var(--card-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
-        .contact-details h3 {
-            color: #667eea;
-            margin-bottom: 5px;
-            font-size: 1.3rem;
+        .method-details h4 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
         }
 
-        .contact-details p {
-            color: #BDC3C7;
-            font-size: 1rem;
-        }
-
-        .contact-details a {
-            color: #667eea;
+        .method-details p, .method-details a {
+            font-size: 0.88rem;
+            color: var(--muted);
             text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            transition: color 0.2s;
         }
 
-        .contact-details a:hover {
-            color: #764ba2;
-            text-decoration: underline;
+        .method-details a:hover { color: var(--accent); }
+
+        .response-box {
+            background: rgba(56,189,248,0.05);
+            border: 1px solid rgba(56,189,248,0.15);
+            border-left: 3px solid var(--accent);
+            border-radius: 12px;
+            padding: 14px 16px;
         }
 
-        .contact-form {
-            background: rgba(0,0,0,0.2);
-            backdrop-filter: blur(15px);
+        .response-box h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .response-box p {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .response-box strong { color: var(--text); }
+
+        /* ── CONTACT FORM ── */
+        .contact-form-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 50px;
-            border: 1px solid rgba(255,255,255,0.1);
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .contact-form h2 {
-            color: #f093fb;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+        .contact-form-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent2), var(--green));
+        }
+
+        .contact-form-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 24px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: #E8EAF6;
-            font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 7px;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
+            padding: 12px 16px;
+            border: 1px solid var(--card-border);
             border-radius: 10px;
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.22s;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
-            background: rgba(255,255,255,0.15);
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            border-color: var(--accent);
+            background: rgba(56,189,248,0.05);
+            box-shadow: 0 0 0 3px rgba(56,189,248,0.1);
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.6);
+            color: rgba(148,163,184,0.5);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 110px;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 18px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            padding: 14px;
+            background: linear-gradient(135deg, #1e40af, #312e81);
             color: #fff;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            border: 1px solid rgba(129,140,248,0.3);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .submit-btn:hover::before {
-            left: 100%;
+            transition: all 0.22s;
+            margin-top: 4px;
         }
 
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30,64,175,0.4);
         }
 
-        .social-section {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 50px;
-            margin: 60px 0;
+        .form-note {
+            margin-top: 12px;
+            font-size: 0.78rem;
+            color: var(--muted);
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            font-style: italic;
         }
 
-        .social-section h2 {
-            color: #f093fb;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-links {
+        /* ── SOCIAL CARDS ── */
+        .social-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
         }
 
         .social-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: center;
             text-decoration: none;
-            color: #fff;
+            color: var(--text);
+            transition: all 0.22s;
             display: block;
         }
 
         .social-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            text-decoration: none;
-            color: #fff;
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.3);
         }
 
-        .social-card.linkedin:hover {
-            border-color: #0077b5;
-            box-shadow: 0 20px 40px rgba(0, 119, 181, 0.3);
-        }
+        .social-card.sl-email:hover   { border-color: #f87171; background: rgba(248,113,113,0.06); }
+        .social-card.sl-linkedin:hover{ border-color: #38bdf8; background: rgba(56,189,248,0.06); }
+        .social-card.sl-github:hover  { border-color: #e2e8f0; background: rgba(255,255,255,0.05); }
+        .social-card.sl-instagram:hover{ border-color: #f472b6; background: rgba(244,114,182,0.06); }
+        .social-card.sl-twitter:hover { border-color: #818cf8; background: rgba(129,140,248,0.06); }
 
-        .social-card.github:hover {
-            border-color: #333;
-            box-shadow: 0 20px 40px rgba(51, 51, 51, 0.3);
-        }
-
-        .social-card.instagram:hover {
-            border-color: #e4405f;
-            box-shadow: 0 20px 40px rgba(228, 64, 95, 0.3);
-        }
-
-        .social-card.twitter:hover {
-            border-color: #1da1f2;
-            box-shadow: 0 20px 40px rgba(29, 161, 242, 0.3);
-        }
-
-        .social-card.email:hover {
-            border-color: #ea4335;
-            box-shadow: 0 20px 40px rgba(234, 67, 53, 0.3);
-        }
-
-        .social-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
+        .social-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
 
         .social-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: hsl(229, 65%, 75%);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
         }
 
         .social-card p {
-            color: #BDC3C7;
-            font-size: 1rem;
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.4;
         }
 
-        .availability-section {
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(139, 195, 74, 0.2));
-            border-radius: 20px;
-            padding: 50px;
-            margin: 60px 0;
-            text-align: center;
-            border: 1px solid rgba(76, 175, 80, 0.3);
+        /* ── AVAILABILITY ── */
+        .avail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
-        .availability-section h2 {
-            color: #4CAF50;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+        .avail-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 22px 20px;
+            transition: transform 0.22s, border-color 0.22s;
+        }
+
+        .avail-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .avail-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
+            gap: 10px;
+            margin-bottom: 8px;
         }
 
-        .availability-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-
-        .availability-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .availability-card h3 {
-            color: #4CAF50;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
+        .status-dot {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            margin-right: 10px;
+            flex-shrink: 0;
         }
 
-        .status-available {
-            background: #4CAF50;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        .dot-green { background: var(--green); box-shadow: 0 0 8px rgba(52,211,153,0.5); animation: pulse-green 2s infinite; }
+        .dot-gold  { background: var(--gold);  box-shadow: 0 0 8px rgba(251,191,36,0.5); }
+
+        @keyframes pulse-green {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
-        .status-busy {
-            background: #FF9800;
-            box-shadow: 0 0 10px rgba(255, 152, 0, 0.5);
+        .avail-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
         }
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .social-links {
-                grid-template-columns: 1fr;
-            }
-
-            .availability-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            .contact-info, .contact-form, .social-section, .availability-section {
-                padding: 30px 20px;
-            }
+        .avail-card p {
+            font-size: 0.82rem;
+            color: var(--muted);
         }
 
-        .highlight {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
+        .looking-for-box {
+            background: rgba(52,211,153,0.05);
+            border: 1px solid rgba(52,211,153,0.15);
+            border-radius: 14px;
+            padding: 24px 28px;
+            margin-bottom: 40px;
         }
 
-        .response-time {
-            background: rgba(102, 126, 234, 0.2);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 30px 0;
-            border-left: 4px solid #667eea;
+        .looking-for-box h4 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
         }
 
-        .response-time h4 {
-            color: #667eea;
+        .looking-for-box ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 8px;
+        }
+
+        .looking-for-box ul li {
+            font-size: 0.88rem;
+            color: var(--muted);
+            padding: 6px 0 6px 18px;
+            position: relative;
+        }
+
+        .looking-for-box ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+        }
+
+        .looking-for-box ul li strong { color: var(--text); }
+
+        /* ── CTA ── */
+        .cta-block {
+            background: linear-gradient(135deg, rgba(56,189,248,0.07), rgba(129,140,248,0.07));
+            border: 1px solid rgba(56,189,248,0.18);
+            border-radius: 20px;
+            padding: 48px 36px;
+            text-align: center;
+        }
+
+        .cta-block h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
             margin-bottom: 10px;
+        }
+
+        .cta-block p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.22s;
+            border: 1px solid transparent;
+        }
+
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .cta-primary { background: linear-gradient(135deg,#1e40af,#312e81); color:#fff; border-color:rgba(129,140,248,0.3); }
+        .cta-green   { background: linear-gradient(135deg,#065f46,#047857); color:#fff; border-color:rgba(52,211,153,0.3); }
+        .cta-outline { background: transparent; color: var(--text); border-color: var(--card-border); }
+        .cta-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .page-header { padding: 40px 20px 32px; }
+            .contact-info-card, .contact-form-card { padding: 24px 20px; }
+            .cta-block { padding: 32px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <div class="header">
-            <h1>📧 Contact Me</h1>
-            <p class="subtitle">Let's Connect and Build Something Amazing Together!</p>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">🏠 Home</a>
-                <a href="about.html" class="nav-link">👨‍💻 About</a>
-                <a href="projects.html" class="nav-link">💼 Projects</a>
-                <a href="PhishPal.html" class="nav-link">🛡️ PhishPal</a>
+<div class="page-wrapper">
+
+    <!-- TOP NAV -->
+    <nav class="topnav">
+        <a href="index.html" class="topnav-brand">⬅ Tiago Perez</a>
+        <div class="topnav-links">
+            <a href="index.html" class="topnav-link">🏠 Home</a>
+            <a href="about.html" class="topnav-link">👤 About</a>
+            <a href="projects.html" class="topnav-link">💼 Projects</a>
+            <a href="PhishPal.html" class="topnav-link">🛡️ PhishPal</a>
+            <a href="contact.html" class="topnav-link active">📧 Contact</a>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <h1>📧 Contact Me</h1>
+        <p class="tagline">Let's connect and build something great together</p>
+    </div>
+
+    <!-- CONTACT GRID -->
+    <p class="section-title">Get In Touch</p>
+    <div class="contact-grid">
+
+        <!-- LEFT: Info -->
+        <div class="contact-info-card">
+            <h2>📞 Contact Info</h2>
+            <p class="sub">Always happy to connect with fellow security professionals, collaborators, or anyone curious about my work.</p>
+
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="method-icon">📧</div>
+                    <div class="method-details">
+                        <h4>Email</h4>
+                        <a href="mailto:tiagoperezfil23@gmail.com">tiagoperezfil23@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <div class="method-icon">💼</div>
+                    <div class="method-details">
+                        <h4>LinkedIn</h4>
+                        <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank">tiago-perez-a7439a325</a>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <div class="method-icon">💻</div>
+                    <div class="method-details">
+                        <h4>GitHub</h4>
+                        <a href="https://github.com/tiagopf2" target="_blank">github.com/tiagopf2</a>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <div class="method-icon">📍</div>
+                    <div class="method-details">
+                        <h4>Location</h4>
+                        <p>Fort Worth, TX · Open to Remote</p>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <div class="method-icon">🗣️</div>
+                    <div class="method-details">
+                        <h4>Languages</h4>
+                        <p>English · Spanish · Portuguese</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="response-box">
+                <h4>⏱️ Response Time</h4>
+                <p>I typically respond within <strong>24–48 hours</strong>. For urgent matters, mention it in the subject line.</p>
             </div>
         </div>
 
-        <!-- Contact Grid -->
-        <div class="contact-grid">
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <h2>📞 Get In Touch</h2>
-                <p style="margin-bottom: 30px; font-size: 1.1rem; color: #BDC3C7;">
-                    I'm always excited to connect with fellow cybersecurity enthusiasts, potential collaborators, or anyone interested in my work. Feel free to reach out!
-                </p>
-
-                <div class="contact-methods">
-                    <div class="contact-method">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p><a href="mailto:tiagoperezfil23@gmail.com">tiagoperezfil23@gmail.com</a></p>
-                        </div>
-                    </div>
-
-                    <div class="contact-method">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-details">
-                            <h3>LinkedIn</h3>
-                            <p><a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank">Professional Network</a></p>
-                        </div>
-                    </div>
-
-                    <div class="contact-method">
-                        <div class="contact-icon">💻</div>
-                        <div class="contact-details">
-                            <h3>GitHub</h3>
-                            <p><a href="https://github.com/tiagopf2" target="_blank">Code Repository</a></p>
-                        </div>
-                    </div>
-
-                    <div class="contact-method">
-                        <div class="contact-icon">🎓</div>
-                        <div class="contact-details">
-                            <h3>University</h3>
-                            <p>Anderson University<br>Cybersecurity Student</p>
-                        </div>
-                    </div>
+        <!-- RIGHT: Form -->
+        <div class="contact-form-card">
+            <h2>💬 Send a Message</h2>
+            <form action="mailto:tiagoperezfil23@gmail.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Full name" required>
                 </div>
-
-                <div class="response-time">
-                    <h4>⏱️ Response Time</h4>
-                    <p>I typically respond to emails within <span class="highlight">24-48 hours</span>. For urgent matters, please mention it in the subject line.</p>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
                 </div>
-            </div>
-
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <h2>💬 Send a Message</h2>
-                <form action="mailto:tiagoperezfil23@gmail.com" method="post" enctype="text/plain">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Tell me about your project, question, or just say hello!" required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">
-                        🚀 Send Message
-                    </button>
-                </form>
-
-                <p style="margin-top: 20px; font-size: 0.9rem; color: #BDC3C7; text-align: center;">
-                    <em>Note: This form will open your default email client. You can also email me directly at the address above.</em>
-                </p>
-            </div>
-        </div>
-
-        <!-- Social Media Section -->
-        <div class="social-section">
-            <h2>🌐 Connect on Social Media</h2>
-            <p style="margin-bottom: 40px; font-size: 1.1rem; color: #BDC3C7;">
-                Follow my journey and stay updated with my latest projects and achievements
-            </p>
-
-            <div class="social-links">
-                <a href="mailto:tiagoperezfil23@gmail.com" class="social-card email">
-                    <span class="social-icon">📧</span>
-                    <h3>Email</h3>
-                    <p>Direct communication for professional inquiries and collaborations</p>
-                </a>
-
-                <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank" class="social-card linkedin">
-                    <span class="social-icon">💼</span>
-                    <h3>LinkedIn</h3>
-                    <p>Professional network and career updates</p>
-                </a>
-
-                <a href="https://github.com/tiagopf2" target="_blank" class="social-card github">
-                    <span class="social-icon">💻</span>
-                    <h3>GitHub</h3>
-                    <p>Code repositories and open source contributions</p>
-                </a>
-
-                <a href="https://www.instagram.com/tiagopf2" target="_blank" class="social-card instagram">
-                    <span class="social-icon">📸</span>
-                    <h3>Instagram</h3>
-                    <p>Personal life, soccer, and behind-the-scenes content</p>
-                </a>
-
-                <a href="https://x.com/tiagopf2" target="_blank" class="social-card twitter">
-                    <span class="social-icon">🐦</span>
-                    <h3>Twitter/X</h3>
-                    <p>Tech thoughts, cybersecurity insights, and quick updates</p>
-                </a>
-            </div>
-        </div>
-
-        <!-- Availability Section -->
-        <div class="availability-section">
-            <h2>⏰ Current Availability</h2>
-            <p style="margin-bottom: 40px; font-size: 1.1rem;">
-                Here's my current status for different types of opportunities
-            </p>
-
-            <div class="availability-grid">
-                <div class="availability-card">
-                    <h3><span class="status-indicator status-available"></span>Internships</h3>
-                    <p>Actively seeking cybersecurity internships for hands-on experience</p>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
                 </div>
-
-                <div class="availability-card">
-                    <h3><span class="status-indicator status-available"></span>Projects</h3>
-                    <p>Open to collaborating on cybersecurity and web development projects</p>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell me about your project, opportunity, or just say hello!" required></textarea>
                 </div>
-
-                <div class="availability-card">
-                    <h3><span class="status-indicator status-available"></span>Networking</h3>
-                    <p>Always happy to connect with industry professionals and peers</p>
-                </div>
-
-                <div class="availability-card">
-                    <h3><span class="status-indicator status-busy"></span>Full-time</h3>
-                    <p>Currently focused on studies, available after December 2024 graduation</p>
-                </div>
-            </div>
-
-            <div style="margin-top: 40px; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 15px;">
-                <h3 style="color: #4CAF50; margin-bottom: 15px;">🎯 What I'm Looking For</h3>
-                <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
-                    <li style="margin: 10px 0;">🔐 <strong>Cybersecurity Internships</strong> - Hands-on experience in penetration testing, incident response, or security analysis</li>
-                    <li style="margin: 10px 0;">🤝 <strong>Collaboration Opportunities</strong> - Open source projects, CTF teams, or research initiatives</li>
-                    <li style="margin: 10px 0;">🎓 <strong>Mentorship</strong> - Learning from experienced professionals in the cybersecurity field</li>
-                    <li style="margin: 10px 0;">🌟 <strong>Entry-level Positions</strong> - Full-time opportunities starting December 2024</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Call to Action -->
-        <div style="text-align: center; margin: 60px 0; padding: 50px; background: rgba(255,255,255,0.05); border-radius: 20px;">
-            <h2 style="color: hwb(229 15% 49%); margin-bottom: 20px;">Ready to Connect? 🚀</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 30px; color: #BDC3C7;">
-                Whether you have a project idea, job opportunity, or just want to chat about cybersecurity, I'd love to hear from you!
-            </p>
-            <a href="mailto:tiagoperezfil23@gmail.com" style="display: inline-block; padding: 18px 40px; background: linear-gradient(45deg, #667eea, #764ba2); color: #fff; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.2rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px rgba(102, 126, 234, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(102, 126, 234, 0.3)'">
-                📧 Send Me an Email
-            </a>
+                <button type="submit" class="submit-btn">🚀 Send Message</button>
+            </form>
+            <p class="form-note">This will open your default email client. You can also email me directly at the address on the left.</p>
         </div>
     </div>
+
+    <!-- SOCIAL -->
+    <p class="section-title">🌐 Connect Online</p>
+    <div class="social-grid">
+        <a href="mailto:tiagoperezfil23@gmail.com" class="social-card sl-email">
+            <span class="social-icon">📧</span>
+            <h3>Email</h3>
+            <p>Direct professional inquiries</p>
+        </a>
+        <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank" class="social-card sl-linkedin">
+            <span class="social-icon">💼</span>
+            <h3>LinkedIn</h3>
+            <p>Professional network & career updates</p>
+        </a>
+        <a href="https://github.com/tiagopf2" target="_blank" class="social-card sl-github">
+            <span class="social-icon">💻</span>
+            <h3>GitHub</h3>
+            <p>Code repos & open source</p>
+        </a>
+        <a href="https://www.instagram.com/tiagopf2" target="_blank" class="social-card sl-instagram">
+            <span class="social-icon">📸</span>
+            <h3>Instagram</h3>
+            <p>Personal life & soccer</p>
+        </a>
+        <a href="https://x.com/tiagopf2" target="_blank" class="social-card sl-twitter">
+            <span class="social-icon">🐦</span>
+            <h3>Twitter / X</h3>
+            <p>Tech thoughts & quick updates</p>
+        </a>
+    </div>
+
+    <!-- AVAILABILITY -->
+    <p class="section-title">⏰ Current Availability</p>
+    <div class="avail-grid">
+        <div class="avail-card">
+            <div class="avail-header">
+                <div class="status-dot dot-green"></div>
+                <h4>Full-time Roles</h4>
+            </div>
+            <p>Available now — currently working at Meta via HCLTech in Fort Worth, TX</p>
+        </div>
+        <div class="avail-card">
+            <div class="avail-header">
+                <div class="status-dot dot-green"></div>
+                <h4>Collaboration</h4>
+            </div>
+            <p>Open to cybersecurity projects, CTF teams, and open source contributions</p>
+        </div>
+        <div class="avail-card">
+            <div class="avail-header">
+                <div class="status-dot dot-green"></div>
+                <h4>Networking</h4>
+            </div>
+            <p>Always happy to connect with industry professionals and peers</p>
+        </div>
+        <div class="avail-card">
+            <div class="avail-header">
+                <div class="status-dot dot-gold"></div>
+                <h4>Remote Work</h4>
+            </div>
+            <p>Open to remote cloud security and cybersecurity opportunities</p>
+        </div>
+    </div>
+
+    <div class="looking-for-box">
+        <h4>🎯 What I'm Looking For</h4>
+        <ul>
+            <li><strong>Cloud Security Roles</strong> — AWS, IAM, detection engineering, SIEM</li>
+            <li><strong>SOC / Detection Engineering</strong> — threat hunting, incident response</li>
+            <li><strong>Collaboration</strong> — open source projects, CTF teams, research</li>
+            <li><strong>Mentorship</strong> — learning from experienced security professionals</li>
+        </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+        <h2>🚀 Ready to Connect?</h2>
+        <p>Whether you have a project idea, job opportunity, or just want to talk security — I'd love to hear from you.</p>
+        <div class="cta-buttons">
+            <a href="mailto:tiagoperezfil23@gmail.com" class="cta-btn cta-primary">📧 Send an Email</a>
+            <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank" class="cta-btn cta-green">💼 Connect on LinkedIn</a>
+            <a href="projects.html" class="cta-btn cta-outline">💼 View My Work</a>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
