@@ -1,518 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhishPal - Anti-Phishing Chrome Extension</title>
-    <title>Contact | Tiago Perez</title>
+    <title>PhishPal | Tiago Perez</title>
     <style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-
-    body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
-    line-height: 1.6;
-    overflow-x: hidden;
-    }
-
-    .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    }
-
-    .header {
-    text-align: center;
-    padding: 60px 0;
-    background: rgba(0,0,0,0.1);
-    border-radius: 20px;
-    margin-bottom: 40px;
-    backdrop-filter: blur(10px);
-    }
-
-    .header h1 {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .header .subtitle {
-    font-size: 1.5rem;
-    color: #E8EAF6;
-    margin-bottom: 30px;
-    }
-
-    .extension-icon {
-    width: 100px;
-    height: 100px;
-    margin: 20px auto;
-    display: block;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    transition: transform 0.3s ease;
-    }
-
-    .extension-icon:hover {
-    transform: scale(1.1);
-    }
-
-    .tech-stack {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 30px 0;
-    flex-wrap: wrap;
-    }
-
-    .tech-badge {
-    background: rgba(255,255,255,0.15);
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    border: 1px solid rgba(255,255,255,0.3);
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
-    }
-
-    .tech-badge:hover {
-    background: rgba(255,255,255,0.25);
-    transform: translateY(-2px);
-    }
-
-    .features-section {
-    margin: 60px 0;
-    }
-
-    .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: #FFD700;
-    }
-
-    .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
-    }
-
-    .feature-card {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 40px;
-    border: 1px solid rgba(255,255,255,0.2);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    }
-
-    .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #FFD700, #FFA500);
-    }
-
-    .feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-
-    .feature-card h3 {
-    color: #FFD700;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    }
-
-    .feature-card .emoji {
-    font-size: 2rem;
-    }
-
-    .how-it-works {
-    background: rgba(0,0,0,0.2);
-    border-radius: 20px;
-    padding: 50px;
-    margin: 60px 0;
-    backdrop-filter: blur(10px);
-    }
-
-    .steps-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-    }
-
-    .step {
-    text-align: center;
-    padding: 30px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    }
-
-    .step:hover {
-    background: rgba(255,255,255,0.1);
-    transform: translateY(-5px);
-    }
-
-    .step-number {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    color: #000;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-weight: bold;
-    font-size: 1.5rem;
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-    }
-
-    .architecture-section {
-    background: rgba(0,0,0,0.3);
-    border-radius: 20px;
-    padding: 50px;
-    margin: 60px 0;
-    backdrop-filter: blur(10px);
-    }
-
-    .architecture-diagram {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin: 40px 0;
-    flex-wrap: wrap;
-    }
-
-    .arch-component {
-    background: rgba(255,255,255,0.1);
-    border-radius: 15px;
-    padding: 25px;
-    text-align: center;
-    min-width: 200px;
-    border: 2px solid rgba(255,255,255,0.2);
-    transition: all 0.3s ease;
-    }
-
-    .arch-component:hover {
-    transform: translateY(-5px);
-    border-color: #FFD700;
-    }
-
-    .arch-arrow {
-    font-size: 2rem;
-    color: #FFD700;
-    }
-
-    .code-demo {
-    background: #1a1a1a;
-    border-radius: 15px;
-    padding: 30px;
-    margin: 40px 0;
-    border-left: 5px solid #FFD700;
-    overflow-x: auto;
-    }
-
-    .code-demo h3 {
-    color: #FFD700;
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    }
-
-    .code-demo pre {
-    background: #2d2d2d;
-    padding: 20px;
-    border-radius: 10px;
-    overflow-x: auto;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    }
-
-    .code-demo code {
-    color: #f8f8f2;
-    }
-
-    .installation {
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(139, 195, 74, 0.2));
-    border-radius: 20px;
-    padding: 50px;
-    margin: 60px 0;
-    border: 1px solid rgba(76, 175, 80, 0.3);
-    }
-
-    .installation h2 {
-    color: #4CAF50;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    text-align: center;
-    }
-
-    .install-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 40px;
-    margin: 40px 0;
-    }
-
-    .install-option {
-    background: rgba(255,255,255,0.1);
-    border-radius: 15px;
-    padding: 30px;
-    border: 2px solid rgba(76, 175, 80, 0.3);
-    transition: all 0.3s ease;
-    }
-
-    .install-option:hover {
-    border-color: #4CAF50;
-    background: rgba(255,255,255,0.15);
-    transform: translateY(-5px);
-    }
-
-    .install-option h3 {
-    color: #4CAF50;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-    }
-
-    .chrome-store-btn {
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 20px auto;
-    padding: 15px 25px;
-    background: linear-gradient(45deg, #4285f4, #34a853);
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
-    }
-
-    .chrome-store-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4);
-    }
-
-    .install-steps {
-    list-style: none;
-    padding: 0;
-    }
-
-    .install-steps li {
-    margin: 15px 0;
-    padding: 15px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 8px;
-    border-left: 4px solid #4CAF50;
-    transition: all 0.3s ease;
-    }
-
-    .install-steps li:hover {
-    background: rgba(255,255,255,0.1);
-    transform: translateX(10px);
-    }
-
-    .install-steps li:before {
-    content: "✓ ";
-    color: #4CAF50;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-right: 15px;
-    }
-
-    .demo-section {
-    background: rgba(0,0,0,0.3);
-    border-radius: 20px;
-    padding: 50px;
-    margin: 60px 0;
-    text-align: center;
-    }
-
-    .demo-link {
-    display: inline-block;
-    margin: 10px;
-    padding: 15px 30px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    text-decoration: none;
-    color: #fff;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    }
-
-    .demo-link:hover {
-    border-color: #FFD700;
-    background: rgba(255, 215, 0, 0.1);
-    }
-
-    .warning {
-    background: linear-gradient(135deg, rgba(255, 152, 0, 0.2), rgba(255, 193, 7, 0.2));
-    border-radius: 15px;
-    padding: 30px;
-    margin: 40px 0;
-    border-left: 5px solid #FF9800;
-    }
-
-    .warning h3 {
-    color: #FF9800;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
-    }
-
-    .buttons {
-    text-align: center;
-    margin: 60px 0;
-    }
-
-    .btn {
-    display: inline-block;
-    padding: 15px 40px;
-    margin: 15px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    position: relative;
-    overflow: hidden;
-    }
-
-    .btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-    }
-
-    .btn:hover::before {
-    left: 100%;
-    }
-
-    .btn-primary {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    color: #000;
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-    }
-
-    .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
-    }
-
-    .btn-secondary {
-    background: transparent;
-    color: #fff;
-    border: 2px solid #fff;
-    }
-
-    .btn-secondary:hover {
-    background: #fff;
-    color: #000;
-    transform: translateY(-3px);
-    }
-
-    .recommended {
-    position: relative;
-    }
-
-    .recommended::after {
-    content: "RECOMMENDED";
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: #4CAF50;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    }
-
-    .highlight {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: bold;
-    }
-
-    .new-badge {
-    background: linear-gradient(45deg, #FF6B6B, #FF4757);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-left: 10px;
-    animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-    }
-
-    @media (max-width: 768px) {
-    .header h1 {
-    font-size: 2.5rem;
-    }
-    
-    .features-grid {
-    grid-template-columns: 1fr;
-    }
-    
-    .steps-container {
-    grid-template-columns: 1fr;
-    }
-
-    .install-options {
-    grid-template-columns: 1fr;
-    }
-
-    .architecture-diagram {
-    flex-direction: column;
-    }
-
-    .arch-arrow {
-    transform: rotate(90deg);
-    }
-
-    .container {
-    padding: 10px;
-    }
-
-    .feature-card, .installation, .how-it-works, .architecture-section {
-    padding: 30px 20px;
-    }
-    }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
@@ -522,6 +14,7 @@
             --green: #34d399;
             --gold: #fbbf24;
             --red: #f87171;
+            --orange: #fb923c;
             --text: #e2e8f0;
             --muted: #94a3b8;
             --card-bg: rgba(255,255,255,0.05);
@@ -534,7 +27,6 @@
             color: var(--text);
             line-height: 1.7;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
         body::before {
@@ -615,13 +107,13 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2), var(--green));
+            background: linear-gradient(90deg, var(--gold), var(--orange), var(--accent2));
         }
 
         .page-header h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
             font-weight: 800;
-            background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -631,7 +123,54 @@
         .page-header .tagline {
             color: var(--muted);
             font-size: 1rem;
+            margin-bottom: 24px;
         }
+
+        .ext-icon {
+            width: 88px;
+            height: 88px;
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+
+        .ext-icon:hover { transform: scale(1.08); }
+
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tech-badge {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid var(--card-border);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .new-pill {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
 
         /* ── SECTION TITLE ── */
         .section-title {
@@ -653,366 +192,385 @@
             background: var(--card-border);
         }
 
-        /* ── CONTACT GRID ── */
-        .contact-grid {
+        /* ── FEATURE CARDS ── */
+        .features-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
             margin-bottom: 40px;
         }
 
-        /* ── CONTACT INFO CARD ── */
-        .contact-info-card {
+        .feature-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 36px;
+            border-radius: 18px;
+            padding: 28px 24px;
             position: relative;
             overflow: hidden;
+            transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
         }
 
-        .contact-info-card::after {
+        .feature-card::after {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            background: linear-gradient(90deg, var(--gold), var(--orange));
         }
 
-        .contact-info-card h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        .contact-info-card .sub {
-            font-size: 0.88rem;
-            color: var(--muted);
-            margin-bottom: 28px;
-        }
-
-        .contact-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .contact-method {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 14px 16px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--card-border);
-            border-left: 3px solid var(--accent);
-            border-radius: 12px;
-            transition: all 0.22s;
-        }
-
-        .contact-method:hover {
-            background: rgba(56,189,248,0.06);
-            border-left-color: var(--accent2);
-            transform: translateX(4px);
-        }
-
-        .method-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(129,140,248,0.15));
-            border: 1px solid var(--card-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .method-details h4 {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-        }
-
-        .method-details p, .method-details a {
-            font-size: 0.88rem;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .method-details a:hover { color: var(--accent); }
-
-        .response-box {
-            background: rgba(56,189,248,0.05);
-            border: 1px solid rgba(56,189,248,0.15);
-            border-left: 3px solid var(--accent);
-            border-radius: 12px;
-            padding: 14px 16px;
-        }
-
-        .response-box h4 {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-        }
-
-        .response-box p {
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-
-        .response-box strong { color: var(--text); }
-
-        /* ── CONTACT FORM ── */
-        .contact-form-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 36px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-form-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent2), var(--green));
-        }
-
-        .contact-form-card h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 7px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            background: rgba(255,255,255,0.04);
-            color: var(--text);
-            font-size: 0.9rem;
-            font-family: inherit;
-            transition: all 0.22s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: rgba(56,189,248,0.05);
-            box-shadow: 0 0 0 3px rgba(56,189,248,0.1);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(148,163,184,0.5);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 110px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #1e40af, #312e81);
-            color: #fff;
-            border: 1px solid rgba(129,140,248,0.3);
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.22s;
-            margin-top: 4px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(30,64,175,0.4);
-        }
-
-        .form-note {
-            margin-top: 12px;
-            font-size: 0.78rem;
-            color: var(--muted);
-            text-align: center;
-            font-style: italic;
-        }
-
-        /* ── SOCIAL CARDS ── */
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .social-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 24px 20px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.22s;
-            display: block;
-        }
-
-        .social-card:hover {
+        .feature-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+            border-color: var(--gold);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.3);
         }
 
-        .social-card.sl-email:hover   { border-color: #f87171; background: rgba(248,113,113,0.06); }
-        .social-card.sl-linkedin:hover{ border-color: #38bdf8; background: rgba(56,189,248,0.06); }
-        .social-card.sl-github:hover  { border-color: #e2e8f0; background: rgba(255,255,255,0.05); }
-        .social-card.sl-instagram:hover{ border-color: #f472b6; background: rgba(244,114,182,0.06); }
-        .social-card.sl-twitter:hover { border-color: #818cf8; background: rgba(129,140,248,0.06); }
-
-        .social-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
-
-        .social-card h3 {
-            font-size: 0.95rem;
+        .feature-card h3 {
+            font-size: 1rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 5px;
-        }
-
-        .social-card p {
-            font-size: 0.78rem;
-            color: var(--muted);
-            line-height: 1.4;
-        }
-
-        /* ── AVAILABILITY ── */
-        .avail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .avail-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
-            padding: 22px 20px;
-            transition: transform 0.22s, border-color 0.22s;
-        }
-
-        .avail-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-        }
-
-        .avail-header {
+            color: var(--gold);
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 8px;
         }
 
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+        .feature-card p, .feature-card ul {
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .feature-card ul {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .feature-card ul li {
+            padding: 3px 0;
+        }
+
+        .feature-card ul li strong { color: var(--text); }
+
+        /* ── ARCHITECTURE ── */
+        .arch-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 24px 0 32px;
+        }
+
+        .arch-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px 24px;
+            text-align: center;
+            min-width: 160px;
+            transition: border-color 0.22s, transform 0.22s;
+        }
+
+        .arch-box:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+
+        .arch-box .arch-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+        .arch-box h4 { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .arch-box p { font-size: 0.75rem; color: var(--muted); }
+
+        .arch-arrow {
+            font-size: 1.5rem;
+            color: var(--gold);
             flex-shrink: 0;
         }
 
-        .dot-green { background: var(--green); box-shadow: 0 0 8px rgba(52,211,153,0.5); animation: pulse-green 2s infinite; }
-        .dot-gold  { background: var(--gold);  box-shadow: 0 0 8px rgba(251,191,36,0.5); }
-
-        @keyframes pulse-green {
-            0%,100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .avail-card h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .avail-card p {
-            font-size: 0.82rem;
-            color: var(--muted);
-        }
-
-        .looking-for-box {
-            background: rgba(52,211,153,0.05);
-            border: 1px solid rgba(52,211,153,0.15);
-            border-radius: 14px;
-            padding: 24px 28px;
+        /* ── STEPS ── */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
             margin-bottom: 40px;
         }
 
-        .looking-for-box h4 {
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: transform 0.22s, border-color 0.22s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent2);
+        }
+
+        .step-num {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--orange));
+            color: #000;
+            font-weight: 800;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+            box-shadow: 0 4px 14px rgba(251,191,36,0.3);
+        }
+
+        .step-card h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .step-card p {
             font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        /* ── INSTALLATION ── */
+        .install-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .install-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 30px 26px;
+            position: relative;
+            transition: transform 0.22s, border-color 0.22s;
+        }
+
+        .install-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--green);
+        }
+
+        .install-card.recommended {
+            border-color: rgba(52,211,153,0.3);
+        }
+
+        .recommended-badge {
+            position: absolute;
+            top: -1px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--green), #059669);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .install-card h3 {
+            font-size: 1rem;
             font-weight: 700;
             color: var(--green);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .chrome-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-align: center;
+            margin-bottom: 18px;
+            transition: all 0.22s;
+            border: 1px solid rgba(129,140,248,0.3);
+        }
+
+        .chrome-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30,64,175,0.4);
+        }
+
+        .install-steps {
+            list-style: none;
+        }
+
+        .install-steps li {
+            font-size: 0.85rem;
+            color: var(--muted);
+            padding: 8px 10px 8px 28px;
+            position: relative;
+            border-left: 2px solid rgba(52,211,153,0.2);
+            margin-bottom: 6px;
+            border-radius: 0 6px 6px 0;
+            background: rgba(52,211,153,0.03);
+            transition: all 0.2s;
+        }
+
+        .install-steps li:hover {
+            background: rgba(52,211,153,0.07);
+            border-left-color: var(--green);
+            color: var(--text);
+        }
+
+        .install-steps li::before {
+            content: '✓';
+            position: absolute;
+            left: 8px;
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* ── CODE BLOCK ── */
+        .code-block {
+            background: #0d1117;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-left: 3px solid var(--gold);
+            border-radius: 14px;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        .code-block h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .code-block pre {
+            background: #161b22;
+            border-radius: 10px;
+            padding: 18px;
+            overflow-x: auto;
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .code-block code { color: #e6edf3; font-family: 'Courier New', monospace; }
+
+        .code-block .key-points {
+            margin-top: 16px;
+        }
+
+        .code-block .key-points h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
-        .looking-for-box ul {
+        .code-block .key-points ul {
             list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 8px;
         }
 
-        .looking-for-box ul li {
-            font-size: 0.88rem;
+        .code-block .key-points ul li {
+            font-size: 0.85rem;
             color: var(--muted);
-            padding: 6px 0 6px 18px;
+            padding: 4px 0 4px 16px;
             position: relative;
         }
 
-        .looking-for-box ul li::before {
+        .code-block .key-points ul li::before {
             content: '▸';
             position: absolute;
             left: 0;
-            color: var(--green);
+            color: var(--accent2);
         }
 
-        .looking-for-box ul li strong { color: var(--text); }
+        .code-block .key-points ul li strong { color: var(--text); }
+
+        /* ── DEMO LINKS ── */
+        .demo-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .demo-link {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.22s;
+        }
+
+        .demo-link:hover {
+            border-color: var(--gold);
+            background: rgba(251,191,36,0.06);
+            color: var(--gold);
+        }
+
+        /* ── WARNING ── */
+        .warning-box {
+            background: rgba(251,146,60,0.06);
+            border: 1px solid rgba(251,146,60,0.2);
+            border-left: 3px solid var(--orange);
+            border-radius: 14px;
+            padding: 22px 24px;
+            margin-bottom: 40px;
+        }
+
+        .warning-box h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .warning-box p {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .warning-box ul {
+            list-style: none;
+        }
+
+        .warning-box ul li {
+            font-size: 0.85rem;
+            color: var(--muted);
+            padding: 3px 0 3px 16px;
+            position: relative;
+        }
+
+        .warning-box ul li::before {
+            content: '⚠';
+            position: absolute;
+            left: 0;
+            font-size: 0.7rem;
+            color: var(--orange);
+        }
 
         /* ── CTA ── */
         .cta-block {
-            background: linear-gradient(135deg, rgba(56,189,248,0.07), rgba(129,140,248,0.07));
-            border: 1px solid rgba(56,189,248,0.18);
+            background: linear-gradient(135deg, rgba(251,191,36,0.07), rgba(251,146,60,0.07));
+            border: 1px solid rgba(251,191,36,0.18);
             border-radius: 20px;
             padding: 48px 36px;
             text-align: center;
@@ -1052,310 +610,22 @@
         }
 
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        .cta-primary { background: linear-gradient(135deg,#1e40af,#312e81); color:#fff; border-color:rgba(129,140,248,0.3); }
-        .cta-green   { background: linear-gradient(135deg,#065f46,#047857); color:#fff; border-color:rgba(52,211,153,0.3); }
+        .cta-gold    { background: linear-gradient(135deg, #92400e, #b45309); color:#fff; border-color:rgba(251,191,36,0.3); }
+        .cta-primary { background: linear-gradient(135deg, #1e40af, #312e81); color:#fff; border-color:rgba(129,140,248,0.3); }
         .cta-outline { background: transparent; color: var(--text); border-color: var(--card-border); }
         .cta-outline:hover { border-color: var(--accent); color: var(--accent); }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .contact-grid { grid-template-columns: 1fr; }
+            .arch-flow { flex-direction: column; }
+            .arch-arrow { transform: rotate(90deg); }
             .page-header { padding: 40px 20px 32px; }
-            .contact-info-card, .contact-form-card { padding: 24px 20px; }
             .cta-block { padding: 32px 20px; }
+            .code-block { padding: 18px 16px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-    <!-- Header Section -->
-    <div class="header">
-    <h1>🛡️ PhishPal</h1>
-    <p class="subtitle">Your Friendly Anti-Phishing Chrome Extension</p>
-    <img src="icon128.png" alt="PhishPal Icon" class="extension-icon">
-    <div class="tech-stack">
-    <span class="tech-badge">Chrome Extension</span>
-    <span class="tech-badge">Railway Backend API <span class="new-badge">NEW</span></span>
-    <span class="tech-badge">VirusTotal Integration</span>
-    <span class="tech-badge">JavaScript ES6+</span>
-    <span class="tech-badge">Manifest V3</span>
-    <span class="tech-badge">Real-time Scanning</span>
-    </div>
-    </div>
-
-    <!-- Features Section -->
-    <div class="features-section">
-    <h2 class="section-title">🚀 Key Features</h2>
-    <div class="features-grid">
-    <div class="feature-card">
-    <h3><span class="emoji">🔍</span>On-Hover Scanning</h3>
-    <p>PhishPal automatically adds a <strong>"🔍 Scan"</strong> button when you hover over any HTTP/HTTPS link. Click to instantly check the link's reputation through our secure backend API.</p>
-    </div>
-    
-    <div class="feature-card">
-    <h3><span class="emoji">🚦</span>Visual Risk Indicators</h3>
-    <p>Get instant visual feedback with color-coded indicators:</p>
-    <ul style="margin-top: 10px; padding-left: 20px;">
-    <li>🟢 <strong>Safe</strong> - No threats detected</li>
-    <li>🟡 <strong>Suspicious</strong> - Flagged by some engines</li>
-    <li>🔴 <strong>Dangerous</strong> - Malicious content detected</li>
-    <li>❓ <strong>Error</strong> - Scan failed or API issue</li>
-    </ul>
-    </div>
-    
-    <div class="feature-card">
-    <h3><span class="emoji">📊</span>Detailed Tooltips</h3>
-    <p>Hover over result markers to see comprehensive VirusTotal statistics including malicious, suspicious, harmless, and undetected counts from multiple security engines.</p>
-    </div>
-    
-    <div class="feature-card">
-    <h3><span class="emoji">⚡</span>Enhanced Performance</h3>
-    <p>Our Railway backend handles API rate limiting, caching, and optimization. No need to manage your own VirusTotal API key - everything works seamlessly out of the box!</p>
-    </div>
-    </div>
-    </div>
-
-    <!-- Architecture Section -->
-    <div class="architecture-section">
-    <h2 class="section-title">🏗️ New Architecture</h2>
-    <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">
-    PhishPal now uses a secure backend API deployed on Railway for enhanced performance and reliability
-    </p>
-    
-    <div class="architecture-diagram">
-    <div class="arch-component">
-    <h4>🌐 Chrome Extension</h4>
-    <p>Content & Background Scripts</p>
-    </div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-component">
-    <h4>🚀 Railway Backend</h4>
-    <p>Express.js API Server</p>
-    </div>
-    <div class="arch-arrow">→</div>
-    <div class="arch-component">
-    <h4>🔍 VirusTotal API</h4>
-    <p>Threat Intelligence</p>
-    </div>
-    </div>
-
-    <div class="features-grid" style="margin-top: 40px;">
-    <div class="feature-card">
-    <h3><span class="emoji">🔒</span>Secure API Handling</h3>
-    <p>Your VirusTotal API key is safely stored on our backend server, never exposed to the client-side extension code.</p>
-    </div>
-    
-    <div class="feature-card">
-    <h3><span class="emoji">⚡</span>Rate Limiting & Caching</h3>
-    <p>Backend handles API rate limits intelligently and caches results to improve performance and reduce API usage.</p>
-    </div>
-    
-    <div class="feature-card">
-    <h3><span class="emoji">🌍</span>Global Availability</h3>
-    <p>Railway deployment ensures high availability and fast response times from anywhere in the world.</p>
-    </div>
-    
-    <div class="feature-card">
-    <h3><span class="emoji">🛠️</span>Easy Maintenance</h3>
-    <p>Centralized backend makes updates and improvements seamless without requiring extension updates.</p>
-    </div>
-    </div>
-    </div>
-
-    <!-- How It Works Section -->
-    <div class="how-it-works">
-    <h2 class="section-title">🔧 How PhishPal Works</h2>
-    <div class="steps-container">
-    <div class="step">
-    <div class="step-number">1</div>
-    <h4>Hover Detection</h4>
-    <p>Content script detects when you hover over HTTP/HTTPS links and dynamically creates scan buttons</p>
-    </div>
-    <div class="step">
-    <div class="step-number">2</div>
-    <h4>User Interaction</h4>
-    <p>Click the "🔍 Scan" button to initiate URL analysis. Button shows loading state during scan</p>
-    </div>
-    <div class="step">
-    <div class="step-number">3</div>
-    <h4>Railway Backend API</h4>
-    <p>Background script sends URL to secure Railway backend server, which handles VirusTotal API calls, rate limiting, and caching</p>
-    </div>
-    <div class="step">
-    <div class="step-number">4</div>
-    <h4>Visual Results</h4>
-    <p>Scan button is replaced with color-coded result marker and detailed tooltip with engine statistics</p>
-    </div>
-    </div>
-    </div>
-
-    <!-- Installation Section -->
-    <div class="installation">
-    <h2>📦 Installation Options</h2>
-    <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">
-    Choose your preferred installation method - now with simplified setup!
-    </p>
-    
-    <div class="install-options">
-    <!-- Chrome Web Store Option -->
-    <div class="install-option recommended">
-    <h3>🏪 Chrome Web Store</h3>
-    <p style="text-align: center; margin-bottom: 20px;">
-    <strong>Easy One-Click Installation - No API Key Required!</strong>
-    </p>
-    <a href="https://chromewebstore.google.com/detail/phishing-hover-detector/jjpkehnmilpkedcbpmfcgkklighplomb?authuser=0&hl=es" 
-    target="_blank" 
-    class="chrome-store-btn">
-    🛒 Install from Chrome Web Store
-    </a>
-    <ul class="install-steps">
-    <li>Click the "Install from Chrome Web Store" button above</li>
-    <li>Click "Add to Chrome" on the Chrome Web Store page</li>
-    <li>Confirm by clicking "Add extension" in the popup</li>
-    <li>PhishPal will be automatically installed and ready to use!</li>
-    <li>Visit any website and hover over links to see PhishPal in action</li>
-    <li>No configuration needed - backend handles everything!</li>
-    </ul>
-    </div>
-
-    <!-- Developer Mode Option -->
-    <div class="install-option">
-    <h3>🔧 Developer Mode</h3>
-    <p style="text-align: center; margin-bottom: 20px;">
-    <strong>For Development & Testing</strong>
-    </p>
-    <ul class="install-steps">
-    <li>Download extension from <a href="https://github.com/tiagopf2" target="_blank" style="color: #4CAF50;">GitHub</a></li>
-    <li>Open Chrome and go to <code>chrome://extensions</code></li>
-    <li>Enable "Developer mode" toggle (top-right)</li>
-    <li>Click "Load unpacked" and select PhishPal folder</li>
-    <li>Extension is ready to use - no API key setup required!</li>
-    <li>Backend automatically handles all VirusTotal API calls</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-
-    <!-- Code Demo Section -->
-    <div class="code-demo">
-    <h3>🧩 Updated Backend Integration</h3>
-    <p>Here's how PhishPal now communicates with the Railway backend:</p>
-    <pre><code>// New backend API integration
-async function checkUrlWithBackend(url) {
-  try {
-    const response = await fetch('https://phishpal-backend-production.up.railway.app/api/check-url', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url })
-    });
-
-    if (!response.ok) {
-      throw new Error(`Backend error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.stats;
-  } catch (error) {
-    console.error('Backend failed:', error);
-    return { 
-      harmless: 0, 
-      malicious: 0, 
-      suspicious: 1, 
-      undetected: 0 
-    };
-  }
-}
-
-// Message handling for content script communication
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "scanLink" && request.link) {
-    checkUrlWithBackend(request.link)
-      .then(stats => sendResponse({ stats }))
-      .catch(error => {
-        console.error("Scan error:", error);
-        sendResponse({ 
-          error: error.message,
-          stats: { harmless: 0, malicious: 0, suspicious: 1, undetected: 0 }
-        });
-      });
-    return true;
-  }
-});</code></pre>
-    </div>
-
-    <!-- Demo Section -->
-    <div class="demo-section">
-    <h2 class="section-title">🎯 Try It Out</h2>
-    <p>Once installed, PhishPal will work on any website. Here are some example links to test:</p>
-    <div style="margin: 30px 0;">
-    <a href="https://www.google.com" class="demo-link">https://www.google.com</a>
-    <a href="https://www.github.com" class="demo-link">https://www.github.com</a>
-    <a href="https://example.com" class="demo-link">https://example.com</a>
-    </div>
-    <p><em>Hover over these links after installation to see PhishPal in action!</em></p>
-    </div>
-
-    <!-- Technical Details -->
-    <div class="code-demo">
-    <h3>⚙️ Updated Technical Implementation</h3>
-    <p><strong>Enhanced Manifest V3 Architecture:</strong></p>
-    <pre><code>{
-  "manifest_version": 3,
-  "name": "Phishing Hover Detector",
-  "version": "1.1",
-  "permissions": ["scripting", "tabs", "storage"],
-  "host_permissions": [
-    "&lt;all_urls&gt;",
-    "https://phishpal-backend-production.up.railway.app/*"
-  ],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [{
-    "matches": ["&lt;all_urls&gt;"],
-    "js": ["content.js"]
-  }],
-  "icons": {
-    "48": "icon48.png"
-  }
-}</code></pre>
-    <p><strong>Key Improvements:</strong></p>
-    <ul style="margin-top: 15px; padding-left: 20px;">
-    <li><strong>Railway Backend:</strong> Secure Express.js server handling all API communications</li>
-    <li><strong>No API Key Required:</strong> Users don't need to manage VirusTotal API keys</li>
-    <li><strong>Enhanced Security:</strong> API credentials safely stored on backend server</li>
-    <li><strong>Better Performance:</strong> Server-side caching and rate limiting</li>
-    <li><strong>Improved Reliability:</strong> Centralized error handling and fallback mechanisms</li>
-    </ul>
-    </div>
-
-    <!-- Warning Section -->
-    <div class="warning">
-    <h3>⚠️ Important Disclaimer</h3>
-    <p>PhishPal is an <span class="highlight">MVP (Minimum Viable Product)</span> designed for educational and demonstration purposes. While it provides real threat detection using VirusTotal's API through our secure backend, users should:</p>
-    <ul style="margin-top: 15px; padding-left: 20px;">
-    <li>Never click on links flagged as dangerous (🔴)</li>
-    <li>Exercise caution even with "safe" results</li>
-    <li>Use additional security measures and common sense</li>
-    <li>Be aware that no security tool is 100% foolproof</li>
-    </ul>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="buttons">
-    <a href="https://chromewebstore.google.com/detail/phishing-hover-detector/jjpkehnmilpkedcbpmfcgkklighplomb?authuser=0&hl=es" 
-    target="_blank" 
-    class="btn btn-primary">
-    🛒 Install Extension
-    </a>
-    <a href="https://github.com/tiagopf2" target="_blank" class="btn btn-secondary">
-    📂 View Source Code
-    </a>
-    <a href="index.html" class="btn btn-secondary">
-    🏠 Back to Portfolio
-    </a>
-    </div>
-    </div>
 <div class="page-wrapper">
 
     <!-- TOP NAV -->
@@ -1365,181 +635,254 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             <a href="index.html" class="topnav-link">🏠 Home</a>
             <a href="about.html" class="topnav-link">👤 About</a>
             <a href="projects.html" class="topnav-link">💼 Projects</a>
-            <a href="PhishPal.html" class="topnav-link">🛡️ PhishPal</a>
-            <a href="contact.html" class="topnav-link active">📧 Contact</a>
+            <a href="PhishPal.html" class="topnav-link active">🛡️ PhishPal</a>
+            <a href="contact.html" class="topnav-link">📧 Contact</a>
         </div>
     </nav>
 
     <!-- PAGE HEADER -->
     <div class="page-header">
-        <h1>📧 Contact Me</h1>
-        <p class="tagline">Let's connect and build something great together</p>
-    </div>
-
-    <!-- CONTACT GRID -->
-    <p class="section-title">Get In Touch</p>
-    <div class="contact-grid">
-
-        <!-- LEFT: Info -->
-        <div class="contact-info-card">
-            <h2>📞 Contact Info</h2>
-            <p class="sub">Always happy to connect with fellow security professionals, collaborators, or anyone curious about my work.</p>
-
-            <div class="contact-methods">
-                <div class="contact-method">
-                    <div class="method-icon">📧</div>
-                    <div class="method-details">
-                        <h4>Email</h4>
-                        <a href="mailto:tiagoperezfil23@gmail.com">tiagoperezfil23@gmail.com</a>
-                    </div>
-                </div>
-                <div class="contact-method">
-                    <div class="method-icon">💼</div>
-                    <div class="method-details">
-                        <h4>LinkedIn</h4>
-                        <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank">tiago-perez-a7439a325</a>
-                    </div>
-                </div>
-                <div class="contact-method">
-                    <div class="method-icon">💻</div>
-                    <div class="method-details">
-                        <h4>GitHub</h4>
-                        <a href="https://github.com/tiagopf2" target="_blank">github.com/tiagopf2</a>
-                    </div>
-                </div>
-                <div class="contact-method">
-                    <div class="method-icon">📍</div>
-                    <div class="method-details">
-                        <h4>Location</h4>
-                        <p>Fort Worth, TX · Open to Remote</p>
-                    </div>
-                </div>
-                <div class="contact-method">
-                    <div class="method-icon">🗣️</div>
-                    <div class="method-details">
-                        <h4>Languages</h4>
-                        <p>English · Spanish · Portuguese</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="response-box">
-                <h4>⏱️ Response Time</h4>
-                <p>I typically respond within <strong>24–48 hours</strong>. For urgent matters, mention it in the subject line.</p>
-            </div>
-        </div>
-
-        <!-- RIGHT: Form -->
-        <div class="contact-form-card">
-            <h2>💬 Send a Message</h2>
-            <form action="mailto:tiagoperezfil23@gmail.com" method="post" enctype="text/plain">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Full name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Tell me about your project, opportunity, or just say hello!" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">🚀 Send Message</button>
-            </form>
-            <p class="form-note">This will open your default email client. You can also email me directly at the address on the left.</p>
+        <img src="icon128.png" alt="PhishPal Icon" class="ext-icon">
+        <h1>🛡️ PhishPal</h1>
+        <p class="tagline">Your friendly anti-phishing Chrome extension, real-time threat detection on every link</p>
+        <div class="tech-badges">
+            <span class="tech-badge">Chrome Extension</span>
+            <span class="tech-badge">Railway Backend API <span class="new-pill">NEW</span></span>
+            <span class="tech-badge">VirusTotal Integration</span>
+            <span class="tech-badge">JavaScript ES6+</span>
+            <span class="tech-badge">Manifest V3</span>
+            <span class="tech-badge">Real-time Scanning</span>
         </div>
     </div>
 
-    <!-- SOCIAL -->
-    <p class="section-title">🌐 Connect Online</p>
-    <div class="social-grid">
-        <a href="mailto:tiagoperezfil23@gmail.com" class="social-card sl-email">
-            <span class="social-icon">📧</span>
-            <h3>Email</h3>
-            <p>Direct professional inquiries</p>
-        </a>
-        <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank" class="social-card sl-linkedin">
-            <span class="social-icon">💼</span>
-            <h3>LinkedIn</h3>
-            <p>Professional network & career updates</p>
-        </a>
-        <a href="https://github.com/tiagopf2" target="_blank" class="social-card sl-github">
-            <span class="social-icon">💻</span>
-            <h3>GitHub</h3>
-            <p>Code repos & open source</p>
-        </a>
-        <a href="https://www.instagram.com/tiagopf2" target="_blank" class="social-card sl-instagram">
-            <span class="social-icon">📸</span>
-            <h3>Instagram</h3>
-            <p>Personal life & soccer</p>
-        </a>
-        <a href="https://x.com/tiagopf2" target="_blank" class="social-card sl-twitter">
-            <span class="social-icon">🐦</span>
-            <h3>Twitter / X</h3>
-            <p>Tech thoughts & quick updates</p>
-        </a>
-    </div>
-
-    <!-- AVAILABILITY -->
-    <p class="section-title">⏰ Current Availability</p>
-    <div class="avail-grid">
-        <div class="avail-card">
-            <div class="avail-header">
-                <div class="status-dot dot-green"></div>
-                <h4>Full-time Roles</h4>
-            </div>
-            <p>Available now — currently working at Meta via HCLTech in Fort Worth, TX</p>
+    <!-- KEY FEATURES -->
+    <p class="section-title">🚀 Key Features</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>🔍 On-Hover Scanning</h3>
+            <p>PhishPal adds a <strong style="color:var(--text)">"🔍 Scan"</strong> button when you hover over any HTTP/HTTPS link. One click instantly checks the URL's reputation through the secure backend API.</p>
         </div>
-        <div class="avail-card">
-            <div class="avail-header">
-                <div class="status-dot dot-green"></div>
-                <h4>Collaboration</h4>
-            </div>
-            <p>Open to cybersecurity projects, CTF teams, and open source contributions</p>
+        <div class="feature-card">
+            <h3>🚦 Visual Risk Indicators</h3>
+            <p>Color-coded results at a glance:</p>
+            <ul>
+                <li>🟢 <strong>Safe</strong>no threats detected</li>
+                <li>🟡 <strong>Suspicious</strong>flagged by some engines</li>
+                <li>🔴 <strong>Dangerous</strong>malicious content detected</li>
+                <li>❓ <strong>Error</strong>scan failed or API issue</li>
+            </ul>
         </div>
-        <div class="avail-card">
-            <div class="avail-header">
-                <div class="status-dot dot-green"></div>
-                <h4>Networking</h4>
-            </div>
-            <p>Always happy to connect with industry professionals and peers</p>
+        <div class="feature-card">
+            <h3>📊 Detailed Tooltips</h3>
+            <p>Hover over result markers to see full VirusTotal stats, malicious, suspicious, harmless, and undetected counts from dozens of security engines.</p>
         </div>
-        <div class="avail-card">
-            <div class="avail-header">
-                <div class="status-dot dot-gold"></div>
-                <h4>Remote Work</h4>
-            </div>
-            <p>Open to remote cloud security and cybersecurity opportunities</p>
+        <div class="feature-card">
+            <h3>⚡ Enhanced Performance</h3>
+            <p>The Railway backend handles API rate limiting, caching, and optimization. No VirusTotal API key needed, everything works out of the box.</p>
         </div>
     </div>
 
-    <div class="looking-for-box">
-        <h4>🎯 What I'm Looking For</h4>
+    <!-- ARCHITECTURE -->
+    <p class="section-title">🏗️ Architecture</p>
+    <div class="arch-flow">
+        <div class="arch-box">
+            <span class="arch-icon">🌐</span>
+            <h4>Chrome Extension</h4>
+            <p>Content & Background Scripts</p>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">
+            <span class="arch-icon">🚀</span>
+            <h4>Railway Backend</h4>
+            <p>Express.js API Server</p>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box">
+            <span class="arch-icon">🔍</span>
+            <h4>VirusTotal API</h4>
+            <p>Threat Intelligence</p>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3>🔒 Secure API Handling</h3>
+            <p>VirusTotal API key is stored on the backend server, never exposed in client-side extension code.</p>
+        </div>
+        <div class="feature-card">
+            <h3>⚡ Rate Limiting & Caching</h3>
+            <p>Backend handles API rate limits intelligently and caches results to improve performance and reduce API usage.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🌍 Global Availability</h3>
+            <p>Railway deployment ensures high availability and fast response times from anywhere in the world.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🛠️ Easy Maintenance</h3>
+            <p>Centralized backend means updates and improvements are seamless, no extension update required.</p>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <p class="section-title">🔧 How It Works</p>
+    <div class="steps-grid">
+        <div class="step-card">
+            <div class="step-num">1</div>
+            <h4>Hover Detection</h4>
+            <p>Content script detects when you hover over HTTP/HTTPS links and dynamically creates scan buttons.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-num">2</div>
+            <h4>User Interaction</h4>
+            <p>Click "🔍 Scan" to initiate URL analysis. Button shows a loading state during the scan.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-num">3</div>
+            <h4>Railway Backend</h4>
+            <p>Background script sends the URL to the secure Railway server, which handles VirusTotal API calls, rate limiting, and caching.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-num">4</div>
+            <h4>Visual Results</h4>
+            <p>Scan button is replaced with a color-coded result marker and detailed tooltip with engine statistics.</p>
+        </div>
+    </div>
+
+    <!-- INSTALLATION -->
+    <p class="section-title">📦 Installation</p>
+    <div class="install-grid">
+        <div class="install-card recommended">
+            <div class="recommended-badge">RECOMMENDED</div>
+            <h3>🏪 Chrome Web Store</h3>
+            <a href="https://chromewebstore.google.com/detail/phishing-hover-detector/jjpkehnmilpkedcbpmfcgkklighplomb?authuser=0&hl=es"
+               target="_blank" class="chrome-btn">
+                🛒 Install from Chrome Web Store
+            </a>
+            <ul class="install-steps">
+                <li>Click "Install from Chrome Web Store" above</li>
+                <li>Click "Add to Chrome" on the store page</li>
+                <li>Confirm by clicking "Add extension"</li>
+                <li>PhishPal is installed and ready to use</li>
+                <li>Hover over any link to see it in action</li>
+                <li>No configuration needed — backend handles everything</li>
+            </ul>
+        </div>
+        <div class="install-card">
+            <h3>🔧 Developer Mode</h3>
+            <ul class="install-steps">
+                <li>Download extension from <a href="https://github.com/tiagopf2" target="_blank" style="color:var(--green)">GitHub</a></li>
+                <li>Open Chrome and go to <code style="color:var(--accent);background:rgba(56,189,248,0.1);padding:1px 6px;border-radius:4px">chrome://extensions</code></li>
+                <li>Enable "Developer mode" toggle (top-right)</li>
+                <li>Click "Load unpacked" and select the PhishPal folder</li>
+                <li>Extension is ready, no API key setup required</li>
+                <li>Backend automatically handles all VirusTotal API calls</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CODE DEMO -->
+    <div class="code-block">
+        <h3>🧩 Backend Integration</h3>
+        <pre><code>// Backend API integration
+async function checkUrlWithBackend(url) {
+  try {
+    const response = await fetch(
+      'https://phishpal-backend-production.up.railway.app/api/check-url',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      }
+    );
+
+    if (!response.ok) throw new Error(`Backend error: ${response.status}`);
+
+    const data = await response.json();
+    return data.stats;
+  } catch (error) {
+    console.error('Backend failed:', error);
+    return { harmless: 0, malicious: 0, suspicious: 1, undetected: 0 };
+  }
+}
+
+// Message handling for content script communication
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "scanLink" && request.link) {
+    checkUrlWithBackend(request.link)
+      .then(stats => sendResponse({ stats }))
+      .catch(error => sendResponse({
+        error: error.message,
+        stats: { harmless: 0, malicious: 0, suspicious: 1, undetected: 0 }
+      }));
+    return true;
+  }
+});</code></pre>
+    </div>
+
+    <!-- MANIFEST -->
+    <div class="code-block">
+        <h3>⚙️ Manifest V3 Configuration</h3>
+        <pre><code>{
+  "manifest_version": 3,
+  "name": "Phishing Hover Detector",
+  "version": "1.1",
+  "permissions": ["scripting", "tabs", "storage"],
+  "host_permissions": [
+    "<all_urls>",
+    "https://phishpal-backend-production.up.railway.app/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [{ "matches": ["<all_urls>"], "js": ["content.js"] }],
+  "icons": { "48": "icon48.png", "128": "icon128.png" }
+}</code></pre>
+        <div class="key-points">
+            <h4>Key Improvements in v1.1</h4>
+            <ul>
+                <li><strong>Railway Backend</strong> secure Express.js server handling all API communications</li>
+                <li><strong>No API Key Required</strong> users don't need to manage VirusTotal API keys</li>
+                <li><strong>Enhanced Security</strong> API credentials safely stored on backend server</li>
+                <li><strong>Better Performance</strong> server-side caching and rate limiting</li>
+                <li><strong>Improved Reliability</strong> centralized error handling and fallback mechanisms</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TRY IT OUT -->
+    <p class="section-title">🎯 Try It Out</p>
+    <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:18px;padding:32px;text-align:center;margin-bottom:40px;">
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:20px;">Once installed, PhishPal works on any website. Hover over these example links to see it in action:</p>
+        <div class="demo-links">
+            <a href="https://www.google.com" class="demo-link">https://www.google.com</a>
+            <a href="https://www.github.com" class="demo-link">https://www.github.com</a>
+            <a href="https://example.com" class="demo-link">https://example.com</a>
+        </div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:14px;font-style:italic;">Hover over these links after installation to see PhishPal in action!</p>
+    </div>
+
+    <!-- WARNING -->
+    <div class="warning-box">
+        <h3>⚠️ Important Disclaimer</h3>
+        <p>PhishPal is an <strong style="color:var(--text)">MVP (Minimum Viable Product)</strong> designed for educational and demonstration purposes. While it provides real threat detection via VirusTotal through a secure backend, users should:</p>
         <ul>
-            <li><strong>Cloud Security Roles</strong> — AWS, IAM, detection engineering, SIEM</li>
-            <li><strong>SOC / Detection Engineering</strong> — threat hunting, incident response</li>
-            <li><strong>Collaboration</strong> — open source projects, CTF teams, research</li>
-            <li><strong>Mentorship</strong> — learning from experienced security professionals</li>
+            <li>Never click on links flagged as dangerous (🔴)</li>
+            <li>Exercise caution even with "safe" results</li>
+            <li>Use additional security measures and common sense</li>
+            <li>Be aware that no security tool is 100% foolproof</li>
         </ul>
     </div>
 
     <!-- CTA -->
     <div class="cta-block">
-        <h2>🚀 Ready to Connect?</h2>
-        <p>Whether you have a project idea, job opportunity, or just want to talk security — I'd love to hear from you.</p>
+        <h2>🛡️ Start Browsing Safer</h2>
+        <p>Install PhishPal in seconds and get real-time phishing protection on every link you hover over.</p>
         <div class="cta-buttons">
-            <a href="mailto:tiagoperezfil23@gmail.com" class="cta-btn cta-primary">📧 Send an Email</a>
-            <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank" class="cta-btn cta-green">💼 Connect on LinkedIn</a>
-            <a href="projects.html" class="cta-btn cta-outline">💼 View My Work</a>
+            <a href="https://chromewebstore.google.com/detail/phishing-hover-detector/jjpkehnmilpkedcbpmfcgkklighplomb?authuser=0&hl=es"
+               target="_blank" class="cta-btn cta-gold">🛒 Install Extension</a>
+            <a href="https://github.com/tiagopf2" target="_blank" class="cta-btn cta-primary">💻 View Source Code</a>
+            <a href="projects.html" class="cta-btn cta-outline">💼 All Projects</a>
         </div>
     </div>
 
 </div>
 </body>
-</html>
 </html>
