@@ -1,603 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiago Perez | Cloud & Cybersecurity Professional</title>
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --primary: #0f172a;
-            --accent: #38bdf8;
-            --accent2: #818cf8;
-            --green: #34d399;
-            --gold: #fbbf24;
-            --text: #e2e8f0;
-            --muted: #94a3b8;
-            --card-bg: rgba(255,255,255,0.05);
-            --card-border: rgba(255,255,255,0.1);
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #0f172a;
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Animated background */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(56,189,248,0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(129,140,248,0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(52,211,153,0.05) 0%, transparent 60%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .page-wrapper {
-            position: relative;
-            z-index: 1;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px 80px;
-        }
-
-        /* ── HERO ── */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 60px 40px 50px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2), var(--green));
-        }
-
-        .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 30px rgba(56,189,248,0.35);
-            object-fit: cover;
-            margin-bottom: 24px;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .avatar-placeholder {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 30px rgba(56,189,248,0.35);
-            background: linear-gradient(135deg, #1e3a5f, #312e81);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-            margin-bottom: 24px;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .hero-name {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-role {
-            font-size: 1.15rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 18px;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-summary {
-            max-width: 640px;
-            color: var(--muted);
-            font-size: 1rem;
-            line-height: 1.75;
-            margin-bottom: 24px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(52,211,153,0.12);
-            color: var(--green);
-            border: 1px solid rgba(52,211,153,0.3);
-            padding: 7px 18px;
-            border-radius: 999px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .status-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
-            50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(52,211,153,0); }
-        }
-
-        /* ── CONTACT ROW ── */
-        .contact-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 8px;
-            font-size: 0.85rem;
-            color: var(--muted);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .contact-item a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .contact-item a:hover { text-decoration: underline; }
-
-        /* ── SECTION TITLE ── */
-        .section-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--card-border);
-        }
-
-        /* ── HIGHLIGHT CARDS ── */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 28px 22px;
-            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-            border-color: var(--accent);
-        }
-
-        .card-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 6px;
-        }
-
-        .card-desc {
-            font-size: 0.88rem;
-            color: var(--muted);
-            line-height: 1.55;
-        }
-
-        /* ── EXPERIENCE ── */
-        .timeline { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
-
-        .timeline-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-left: 3px solid var(--accent);
-            border-radius: 12px;
-            padding: 20px 24px;
-            transition: border-color 0.25s, box-shadow 0.25s;
-        }
-
-        .timeline-item:hover {
-            border-left-color: var(--accent2);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-
-        .timeline-role {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #fff;
-        }
-
-        .timeline-company {
-            font-size: 0.88rem;
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .timeline-date {
-            font-size: 0.8rem;
-            color: var(--muted);
-            white-space: nowrap;
-            background: rgba(255,255,255,0.06);
-            padding: 3px 10px;
-            border-radius: 999px;
-        }
-
-        .timeline-bullets {
-            list-style: none;
-            margin-top: 8px;
-        }
-
-        .timeline-bullets li {
-            font-size: 0.88rem;
-            color: var(--muted);
-            padding: 3px 0 3px 16px;
-            position: relative;
-        }
-
-        .timeline-bullets li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        /* ── SKILLS ── */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .skill-group {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 14px;
-            padding: 20px;
-        }
-
-        .skill-group-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent2);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-tag {
-            background: rgba(56,189,248,0.1);
-            color: var(--accent);
-            border: 1px solid rgba(56,189,248,0.2);
-            padding: 4px 12px;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        /* ── NAV BUTTONS ── */
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .nav-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 18px 20px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.25s;
-            border: 1px solid transparent;
-        }
-
-        .nav-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
-
-        .btn-about   { background: linear-gradient(135deg,#1e40af,#312e81); color:#fff; border-color:rgba(129,140,248,0.3); }
-        .btn-projects{ background: linear-gradient(135deg,#065f46,#047857); color:#fff; border-color:rgba(52,211,153,0.3); }
-        .btn-phishpal{ background: linear-gradient(135deg,#1e3a5f,#0369a1); color:#fff; border-color:rgba(56,189,248,0.3); }
-        .btn-contact { background: linear-gradient(135deg,#7f1d1d,#b91c1c); color:#fff; border-color:rgba(248,113,113,0.3); }
-
-        /* ── SOCIAL LINKS ── */
-        .social-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 22px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: 1px solid var(--card-border);
-            background: var(--card-bg);
-            transition: all 0.25s;
-        }
-
-        .social-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-
-        .sl-linkedin { color: #38bdf8; }
-        .sl-linkedin:hover { border-color: #38bdf8; background: rgba(56,189,248,0.08); }
-
-        .sl-github { color: #e2e8f0; }
-        .sl-github:hover { border-color: #e2e8f0; background: rgba(255,255,255,0.06); }
-
-        .sl-resume { color: var(--green); }
-        .sl-resume:hover { border-color: var(--green); background: rgba(52,211,153,0.08); }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 640px) {
-            .hero { padding: 40px 20px; }
-            .timeline-header { flex-direction: column; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiago Perez</title>
+<meta name="description" content="Tiago Perez: cybersecurity graduate and Data Center Analyst at Meta via HCLTech.">
+<link rel="icon" href="icon128.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="page-wrapper">
 
-    <!-- HERO -->
-    <section class="hero">
-        <img src="cv picture.jpg" alt="Tiago Perez" class="avatar">
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="mark" href="#">Tiago Perez</a>
+    <nav>
+      <a href="#experience" data-es="Experiencia">Experience</a>
+      <a href="#work" data-es="Proyectos">Work</a>
+      <a href="#education" data-es="Formación">Education</a>
+      <a href="TiagoPerez_Resume.pdf" class="cv" data-es="Currículum">Résumé</a>
+      <button type="button" class="lang" id="lang" aria-label="Ver en español">ES</button>
+    </nav>
+  </div>
+</header>
 
-        <h1 class="hero-name">Tiago Perez</h1>
-        <p class="hero-role">Cloud Security & Cybersecurity Professional</p>
+<main class="wrap">
 
-        <p class="hero-summary">
-            Cybersecurity graduate with hands-on experience in cloud security, IAM, and detection engineering.
-            Currently supporting Meta data center operations via HCLTech with a focus on secure infrastructure and reliability.
-            Strong background in AWS security, network monitoring, and automation.
-        </p>
+  <section class="intro">
+    <div class="intro-text">
+      <h1 data-es="Graduado en Ciberseguridad y Data Center Analyst en Meta.">Cybersecurity graduate and Data Center Analyst at Meta.</h1>
+      <p class="lede" data-es="Tengo un grado en Ciberseguridad por Anderson University y actualmente doy soporte a las operaciones de los data centers de Meta a través de HCLTech. También he desarrollado una plataforma de entrenamiento que un gimnasio en Francia usa a diario, un pipeline de captación automatizado con LLM y un entorno seguro multi-VPC en AWS.">
+        I hold a BSc in Cybersecurity from Anderson University and currently support Meta's hyperscale data center operations through HCLTech.
+        I've also built a coaching platform used daily by a gym in France, an LLM-powered outreach pipeline, and a secure multi-VPC environment on AWS.
+      </p>
+      <p class="links">
+        <a href="mailto:tiagoperezfil23@gmail.com">tiagoperezfil23@gmail.com</a>
+        <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/">LinkedIn</a>
+        <a href="https://github.com/tiagopf2">GitHub</a>
+      </p>
+    </div>
+  </section>
 
-        <div class="contact-row">
-            <span class="contact-item">📧 <a href="mailto:tiagoperezfil23@gmail.com">tiagoperezfil23@gmail.com</a></span>
-            <span class="contact-item">🌐 <a href="https://thunderous-praline-aaebfc.netlify.app/" target="_blank">Portfolio</a></span>
-            <span class="contact-item">🗣️ English · Spanish · Portuguese</span>
-        </div>
-    </section>
+  <section id="experience">
+    <h2 data-es="Experiencia">Experience</h2>
 
-    <!-- HIGHLIGHTS -->
-    <p class="section-title">Highlights</p>
-    <div class="cards-grid">
-        <div class="card">
-            <span class="card-icon">☁️</span>
-            <div class="card-title">AWS Cloud Security</div>
-            <div class="card-desc">IAM policies, VPC segmentation, CloudTrail & CloudWatch logging built from scratch.</div>
-        </div>
-        <div class="card">
-            <span class="card-icon">🛡️</span>
-            <div class="card-title">PhishPal Extension</div>
-            <div class="card-desc">Real-time phishing detection Chrome extension powered by the VirusTotal API.</div>
-        </div>
-        <div class="card">
-            <span class="card-icon">🏆</span>
-            <div class="card-title">CTF Top 20%</div>
-            <div class="card-desc">National Cyber League competitor, consistently placing in the top 20% nationally.</div>
-        </div>
-        <div class="card">
-            <span class="card-icon">🎓</span>
-            <div class="card-title">BSc Cybersecurity</div>
-            <div class="card-desc">Anderson University Dean's List, Order of the Sword & Shield Honor Society.</div>
-        </div>
+    <article class="row">
+      <p class="when" data-es="2026 – hoy">2026 – now</p>
+      <div>
+        <h3>Data Center Analyst <span class="org">Meta via HCLTech · Fort Worth, TX</span></h3>
+        <ul>
+          <li data-es="Desarrollo scripts en Python que recogen y analizan métricas del data center para decidir cómo se gestionan las incidencias de infraestructura.">Write Python scripts that collect and analyze data center metrics to decide how infrastructure issues get handled.</li>
+          <li data-es="Resuelvo problemas de hardware y conectividad con los equipos de ingeniería bajo estrictos procedimientos de control de acceso y seguridad operativa.">Troubleshoot hardware and connectivity with engineering teams under strict access-control and opsec procedures.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="row">
+      <p class="when" data-es="2026 – hoy">2026 – now</p>
+      <div>
+        <h3><span data-es="Desarrollador Full-Stack">Full-Stack Developer</span> <span class="org" data-es="Gimnasio La Forge · Levallois-Perret, Francia · Remoto">La Forge gym · Levallois-Perret, France · Remote</span></h3>
+        <ul>
+          <li data-es="Único desarrollador de una aplicación web pensada para iPad que los entrenadores usan cada día: evaluaciones, registro de entrenamientos, paneles de progreso y generación de programas de 4 a 8 semanas.">Sole developer of an iPad-first web app coaches use every day: assessments, workout logging, member progress dashboards and 4–8 week program generation.</li>
+          <li data-es="Diseñé el modelo de datos, la autenticación, la interfaz y los despliegues. Un único wrapper de rutas gestiona autenticación, validación y errores en toda la API.">Built the data model, auth, UI and deploys. One shared route wrapper handles auth, validation and errors for every API route.</li>
+          <li data-es="Producción y preview usan bases de datos y secretos separados, así que las versiones de prueba nunca tocan datos reales de los socios.">Production and preview deploys run on separate databases and secrets, so test builds never touch real member data.</li>
+        </ul>
+        <p class="stack">Next.js · React · TypeScript · PostgreSQL / Prisma · NextAuth · Netlify · Neon</p>
+      </div>
+    </article>
+
+    <article class="row">
+      <p class="when">2025 – 2026</p>
+      <div>
+        <h3><span data-es="Ingeniero de Automatización">Automation Engineer</span> <span class="org" data-es="Athlete Student Agency · Remoto">Athlete Student Agency · Remote</span></h3>
+        <ul>
+          <li data-es="Construí un pipeline en Python que, con un solo clic, gestiona una base de datos de atletas y unas 3.000 universidades, redacta correos personalizados con una API de LLM y los envía. Sustituyó unas 20 horas semanales de trabajo manual.">Built a one-click Python pipeline over a database of athletes and ~3,000 universities that drafts tailored outreach with an LLM API and sends it. Replaced roughly 20 hours a week of manual work.</li>
+          <li data-es="Configuré el acceso remoto por VPN con autenticación por clave SSH.">Set up remote access over VPN with SSH key authentication.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="row">
+      <p class="when">2022 – 2025</p>
+      <div>
+        <h3><span data-es="Asistente de IT / Embajador Internacional">IT Assistant / International Ambassador</span> <span class="org">Anderson University</span></h3>
+        <ul>
+          <li data-es="Soporte de cuentas, autenticación e incidencias para estudiantes y personal; campañas de concienciación en ciberseguridad.">Account access, authentication and troubleshooting for students and staff; ran security-awareness outreach.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="work">
+    <h2 data-es="Proyectos destacados">Selected work</h2>
+
+    <div class="grid">
+      <article class="project">
+        <h3><a href="https://github.com/tiagopf2/aws-cloud-security-lab" data-es="Laboratorio de seguridad en AWS">AWS Cloud Security Lab</a></h3>
+        <p data-es="Entorno multi-VPC definido en Terraform: peering, NACLs, IAM de mínimo privilegio con MFA, S3 cifrado, registros con CloudTrail y CloudWatch, además de GuardDuty, Inspector y Macie.">Multi-VPC environment written as Terraform: peering, NACLs, least-privilege IAM with MFA, encrypted S3,
+          CloudTrail and CloudWatch logging, plus GuardDuty, Inspector and Macie.</p>
+        <p class="stack">Terraform · AWS</p>
+      </article>
+
+      <article class="project">
+        <h3><a href="https://github.com/tiagopf2/AAPLStockSentiment" data-es="Clasificador de sentimiento de AAPL">AAPL Sentiment Classifier</a></h3>
+        <p data-es="15 años de precios combinados con indicadores de sentimiento de noticias. Una división temporal evita que datos futuros entren en el entrenamiento. XGBoost y Random Forest subieron el ROC-AUC de 0,54 a 0,58.">15 years of price data joined with news-sentiment features. A time-based split keeps future data out of training.
+          XGBoost and Random Forest moved ROC-AUC from 0.54 to 0.58.</p>
+        <p class="stack">Python · scikit-learn · XGBoost · pandas</p>
+      </article>
+
+      <article class="project">
+        <h3><a href="https://github.com/tiagopf2/PhishPal">PhishPal</a></h3>
+        <p data-es="Extensión de Chrome que comprueba los enlaces en VirusTotal al pasar el ratón y avisa en la propia página. Un pequeño &lt;a href=&quot;https://github.com/tiagopf2/phishpal-backend&quot;&gt;backend&lt;/a&gt; mantiene la clave de la API fuera del cliente.">Chrome extension that checks links against VirusTotal when you hover them and warns inline.
+          A small <a href="https://github.com/tiagopf2/phishpal-backend">backend</a> keeps the API key off the client.</p>
+        <p class="stack">JavaScript · Chrome Extensions API · VirusTotal</p>
+      </article>
+
+      <article class="project">
+        <h3><a href="https://github.com/tiagopf2/Soccer" data-es="Control del campo con Voronoi">Voronoi Pitch Control</a></h3>
+        <p data-es="Dibuja la zona de influencia de cada jugador en el campo con diagramas de Voronoi, para analizar el espacio y el posicionamiento.">Draws each player's zone of influence on the pitch with Voronoi diagrams, a tool I built from
+          my time as a team captain to talk about space and positioning.</p>
+        <p class="stack">Python · computational geometry</p>
+        <details>
+          <summary data-es="Ver demo (18 MB)">Watch demo (18 MB)</summary>
+          <video controls preload="none" src="VoronoiDiagramsSoccer.mp4"></video>
+        </details>
+      </article>
     </div>
 
-    <!-- EXPERIENCE -->
-    <p class="section-title">Experience</p>
-    <div class="timeline">
+    <p class="also" data-es="Además: &lt;a href=&quot;https://github.com/tiagopf2/Juan_GPT&quot;&gt;JuanGPT&lt;/a&gt;, un asistente de voz en mi móvil (voz → LLM → voz), y un &lt;a href=&quot;https://github.com/tiagopf2/Benford-fraud-detector&quot;&gt;detector de fraude basado en la ley de Benford&lt;/a&gt; que puntúa proveedores sospechosos.">Also: <a href="https://github.com/tiagopf2/Juan_GPT">JuanGPT</a>, a voice assistant on my phone (speech → LLM → speech),
+      and a <a href="https://github.com/tiagopf2/Benford-fraud-detector">Benford's Law fraud detector</a> that scores suspicious vendors.</p>
+  </section>
 
-        <div class="timeline-item">
-            <div class="timeline-header">
-                <div>
-                    <div class="timeline-role">Data Center Analyst</div>
-                    <div class="timeline-company">Meta via HCLTech · Fort Worth, TX</div>
-                </div>
-                <span class="timeline-date">2025 – Present</span>
-            </div>
-            <ul class="timeline-bullets">
-                <li>Support operations in a hyperscale data center environment.</li>
-                <li>Maintain system uptime, reliability, and security compliance.</li>
-                <li>Follow strict access control and operational security procedures.</li>
-                <li>Troubleshoot infrastructure and connectivity issues with engineering teams.</li>
-            </ul>
-        </div>
+  <section id="education">
+    <h2 data-es="Formación">Education</h2>
+    <p data-es="&lt;strong&gt;Grado en Ciberseguridad&lt;/strong&gt;, Anderson University, 2025"><strong>BSc Cybersecurity</strong>, Anderson University, 2025</p>
+    <ul class="plain">
+      <li data-es="Dean's List (cuadro de honor)">Dean's List</li>
+      <li data-es="Sociedades de honor Order of the Sword &amp; Shield y Denmark Society">Order of the Sword &amp; Shield Honor Society, Denmark Society</li>
+      <li data-es="&lt;a href=&quot;https://andersonuniversity.edu/news/anderson-university-lands-top-spot-national-cyber-league-competition/&quot;&gt;National Cyber League&lt;/a&gt;, top 20 % nacional"><a href="https://andersonuniversity.edu/news/anderson-university-lands-top-spot-national-cyber-league-competition/">National Cyber League</a>, top 20% nationally</li>
+      <li data-es="Capitán del equipo de fútbol masculino">Men's soccer team captain</li>
+      <li data-es="Cursos internos de machine learning de Meta">Meta internal machine learning courses</li>
+    </ul>
+  </section>
 
-        <div class="timeline-item">
-            <div class="timeline-header">
-                <div>
-                    <div class="timeline-role">Automation Engineer</div>
-                    <div class="timeline-company">Athlete Student Agency (Remote)</div>
-                </div>
-                <span class="timeline-date">2025 – Present</span>
-            </div>
-            <ul class="timeline-bullets">
-                <li>Built Python scripts to automate workflows and data handling.</li>
-                <li>Implemented secure remote access using VPN and SSH authentication.</li>
-                <li>Reduced manual processes and improved operational efficiency.</li>
-            </ul>
-        </div>
+  <section id="skills">
+    <h2 data-es="Herramientas">Tools</h2>
+    <dl class="skills">
+      <dt data-es="Ingeniería">Engineering</dt><dd>Python, TypeScript, Next.js, React, PostgreSQL / Prisma, Terraform, Git</dd>
+      <dt data-es="Seguridad">Security</dt><dd>AWS (IAM, VPC, GuardDuty, CloudTrail, CloudWatch), Wireshark, Suricata, Security Onion, Arkime, Nessus, OpenVPN</dd>
+      <dt>AI / ML</dt><dd>LLM APIs, scikit-learn, XGBoost, pandas</dd>
+    </dl>
+  </section>
 
-        <div class="timeline-item">
-            <div class="timeline-header">
-                <div>
-                    <div class="timeline-role">IT Assistant / International Ambassador</div>
-                    <div class="timeline-company">Anderson University</div>
-                </div>
-                <span class="timeline-date">2022 – 2025</span>
-            </div>
-            <ul class="timeline-bullets">
-                <li>Provided technical support for account access, troubleshooting, and system navigation.</li>
-                <li>Assisted users with secure authentication systems and platform access.</li>
-                <li>Promoted cybersecurity awareness and secure data handling practices.</li>
-            </ul>
-        </div>
+  <section id="contact" class="contact">
+    <h2 data-es="Contacto">Get in touch</h2>
+    <p class="links big">
+      <a href="mailto:tiagoperezfil23@gmail.com">tiagoperezfil23@gmail.com</a>
+      <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/">LinkedIn</a>
+      <a href="https://github.com/tiagopf2">GitHub</a>
+      <a href="TiagoPerez_Resume.pdf" data-es="Currículum (PDF)">Résumé (PDF)</a>
+    </p>
+  </section>
 
-        <div class="timeline-item">
-            <div class="timeline-header">
-                <div>
-                    <div class="timeline-role">Security Systems Technician</div>
-                    <div class="timeline-company">Carolina Burglar & Fire Alarm</div>
-                </div>
-                <span class="timeline-date">2025</span>
-            </div>
-            <ul class="timeline-bullets">
-                <li>Installed and configured alarm and surveillance systems.</li>
-                <li>Supported secure deployment and troubleshooting in client environments.</li>
-            </ul>
-        </div>
+</main>
 
-    </div>
+<script>
+(function () {
+  var nodes = document.querySelectorAll('[data-es]');
+  nodes.forEach(function (el) { el.setAttribute('data-en', el.innerHTML); });
+  var btn = document.getElementById('lang');
 
-    <!-- SKILLS -->
-    <p class="section-title">Technical Skills</p>
-    <div class="skills-grid">
-        <div class="skill-group">
-            <div class="skill-group-title">Cloud & Security</div>
-            <div class="skill-tags">
-                <span class="skill-tag">AWS IAM</span>
-                <span class="skill-tag">VPC</span>
-                <span class="skill-tag">EC2</span>
-                <span class="skill-tag">CloudTrail</span>
-                <span class="skill-tag">CloudWatch</span>
-                <span class="skill-tag">OpenVPN</span>
-                <span class="skill-tag">SSH</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-title">Security Tools</div>
-            <div class="skill-tags">
-                <span class="skill-tag">Wireshark</span>
-                <span class="skill-tag">Suricata</span>
-                <span class="skill-tag">Security Onion</span>
-                <span class="skill-tag">Arkime</span>
-                <span class="skill-tag">Nessus</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-title">Concepts</div>
-            <div class="skill-tags">
-                <span class="skill-tag">IAM</span>
-                <span class="skill-tag">Least Privilege</span>
-                <span class="skill-tag">MFA</span>
-                <span class="skill-tag">SIEM</span>
-                <span class="skill-tag">Threat Detection</span>
-                <span class="skill-tag">Network Security</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-title">Programming & Languages</div>
-            <div class="skill-tags">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">English</span>
-                <span class="skill-tag">Spanish</span>
-                <span class="skill-tag">Portuguese</span>
-            </div>
-        </div>
-    </div>
+  function apply(lang) {
+    nodes.forEach(function (el) { el.innerHTML = el.getAttribute(lang === 'es' ? 'data-es' : 'data-en'); });
+    document.documentElement.lang = lang;
+    btn.textContent = lang === 'es' ? 'EN' : 'ES';
+    btn.setAttribute('aria-label', lang === 'es' ? 'View in English' : 'Ver en español');
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
 
-    <!-- NAVIGATION -->
-    <p class="section-title">Explore</p>
-    <div class="nav-grid">
-        <a href="about.html" class="nav-btn btn-about">👨‍💻 About Me</a>
-        <a href="projects.html" class="nav-btn btn-projects">💼 Projects</a>
-        <a href="PhishPal.html" class="nav-btn btn-phishpal">🛡️ PhishPal</a>
-        <a href="contact.html" class="nav-btn btn-contact">📧 Contact</a>
-    </div>
+  btn.addEventListener('click', function () {
+    apply(document.documentElement.lang === 'es' ? 'en' : 'es');
+  });
 
-    <!-- SOCIAL -->
-    <div class="social-row">
-        <a href="https://www.linkedin.com/in/tiago-perez-a7439a325/" target="_blank" class="social-link sl-linkedin">
-            💼 LinkedIn
-        </a>
-        <a href="https://github.com/tiagopf2" target="_blank" class="social-link sl-github">
-            💻 GitHub
-        </a>
-        <a href="TiagoPerez_Resume.pdf" target="_blank" class="social-link sl-resume">
-            📄 Resume
-        </a>
-    </div>
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  if (saved === 'es') apply('es');
+})();
+</script>
 
-</div>
 </body>
 </html>
